@@ -1,0 +1,24 @@
+{
+  "name": "construcao-sw-grupo-4",
+  "version": "1.0.0",
+  "description": "Construçao de software grupo 4",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo4.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo4/issues"
+  },
+  "homepage": "https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo4#readme",
+  "dependencies": {
+    "@hapi/hapi": "^20.0.0",
+    "joi": "^17.2.1",
+    "mongoose": "^5.10.6"
+  }
+}
