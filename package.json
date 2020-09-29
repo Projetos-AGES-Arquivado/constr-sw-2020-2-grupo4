@@ -4,8 +4,9 @@
   "description": "Construçao de software grupo 4",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon index.js",
-    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "start": "nodemon src/index.js",
+    "start:prod": "node src/index.js",
     "test": "test"
   },
   "repository": {
