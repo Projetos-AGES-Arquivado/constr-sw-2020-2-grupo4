@@ -1,0 +1,14 @@
+{
+    "dev": {
+        "host": "mongodb://localhost/",
+        "user" : "root",
+        "password" : "foot",
+        "database": "class"
+    },
+    "prod": {
+        "host": "mongodb://localhost/", 
+        "user" : "root",
+        "password" : "foot",
+        "database": "class"
+    }
+}

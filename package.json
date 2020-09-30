@@ -21,7 +21,8 @@
   "dependencies": {
     "@hapi/hapi": "^20.0.0",
     "joi": "^17.2.1",
-    "mongoose": "^5.10.6"
+    "mongoose": "^5.10.6",
+    "q": "^1.5.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.4"

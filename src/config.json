@@ -1,0 +1,12 @@
+{
+    "dev": {
+        "env" : "development",
+        "host": "localhost",
+        "port": "3001"
+    },
+    "prod": {
+        "env" : "prod",
+        "host": "localhost",
+        "port": "3000"
+    }
+}
