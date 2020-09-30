@@ -3,7 +3,7 @@ const joi = require('joi');
 const mongoose = require('mongoose');
 
 /* MongoDb connection */
-mongoose.connect("mongodb://localhost/class", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect("mongodb://admin:admin@localhost:27017", { useNewUrlParser: true, useUnifiedTopology: true });
 
 //const ClassModel = mongoose.model("class", {
 //    date: String
@@ -13,7 +13,7 @@ const init = async () => {
 
     const server = hapi.server({
         port: 3000,
-        host: 'localhost'
+        host: '0.0.0.0'
     });
 
     server.route({

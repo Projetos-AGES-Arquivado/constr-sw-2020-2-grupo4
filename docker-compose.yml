@@ -1,0 +1,25 @@
+version: "3.7"
+
+services:
+  api:
+    container_name: api-class-grupo4
+    build: '.'
+    depends_on: 
+      - db
+    ports: 
+      - '3000:3000'
+    volumes: 
+      - .:/usr/src/app
+    command: npm start
+    restart: unless-stopped
+
+  db:
+    container_name: grupo4-mongo
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    ports:
+      - '27017:27017'
+    restart: unless-stopped
