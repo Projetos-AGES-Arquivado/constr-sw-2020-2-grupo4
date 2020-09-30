@@ -4,9 +4,9 @@
   "description": "Construçao de software grupo 4",
   "main": "src/index.js",
   "scripts": {
-    "dev": "nodemon src/index.js",
-    "start": "nodemon src/index.js",
-    "start:prod": "node src/index.js",
+    "dev": "nodemon index.js",
+    "start": "nodemon index.js",
+    "start:prod": "node index.js",
     "test": "test"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo4#readme",
   "dependencies": {
     "@hapi/hapi": "^20.0.0",
+    "hapi-swagger": "^14.0.0",
     "joi": "^17.2.1",
     "mongoose": "^5.10.6",
     "q": "^1.5.1"
