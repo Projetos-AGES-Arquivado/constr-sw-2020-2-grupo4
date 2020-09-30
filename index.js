@@ -19,13 +19,13 @@ var host = constants.application['host'];
 var port = constants.application['port'];
 const server = new Hapi.Server({ host:host, port: port });
 
-server.ext('onRequest', function(request, next){
+server.ext('onRequest', (request, next) => {
 	request.plugins.createControllerParams = function(requestParams){
 		var params = _.clone(requestParams);
 		params.userId = request.auth.credentials.userId;
 		return params;
 	};
-	next();
+	return next.continue;
 });
 
 // Add all the routes within the routes folder

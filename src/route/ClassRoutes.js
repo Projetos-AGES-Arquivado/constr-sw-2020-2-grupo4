@@ -8,9 +8,17 @@ module.exports = () => {
     return [
         {
             method: 'GET',
-            path: '/class',
-            config: {
-                handler: ClassController.findAll,
+            path: '/index',
+            handler: async (request, resp) => {
+                try {
+                    var data = {
+                        success: "true",
+                        message: "Hello world"
+                    }
+                    return resp.response(data);
+                } catch (error) {
+                    return resp.response(error).code(500);
+                }
             }
         },
         {
