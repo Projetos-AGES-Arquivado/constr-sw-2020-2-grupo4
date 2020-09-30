@@ -5,8 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "start": "nodemon index.js",
-    "start:prod": "node index.js",
+    "start": "NODE_ENV=dev nodemon index.js",
+    "start:prod": "NODE_ENV=prod node index.js",
     "test": "test"
   },
   "repository": {
