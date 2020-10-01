@@ -10,6 +10,7 @@ module.exports = () => {
             method: 'GET',
             path: '/index',
             options: {
+                auth: 'simple',
                 description: 'Index endpoint to test if application is up and running',
                 notes: 'Returns a hello world',
                 tags: ['api'],

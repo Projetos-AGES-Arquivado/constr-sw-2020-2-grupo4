@@ -5,9 +5,34 @@ var constants = require('./src/config/constants.js');
 var routes = require('./src/route/ClassRoutes')();
 const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
+const HapiBasicAuth = require('@hapi/basic');
 const Pack = require('./package');
 const HapiSwagger = require('hapi-swagger');
+const Bcrypt = require('bcrypt');
 //var _ = require('underscore');
+//console.log('constantes index: ', constants);
+
+const users = {
+	admin: {
+		username: 'admin',
+		password: '$2b$10$Aru7h3cOy9vLVqLNVdMzYeZsQvC7uSeWOB/ZDtWyyOCIbpHNXefQe',
+		name: 'admin',
+		id: '2133d32a'
+	}
+};
+
+const validate = async (request, username, password) => {
+
+	const user = users[username];
+	if (!user) {
+		return { credentials: null, isValid: false };
+	}
+
+	const isValid = await Bcrypt.compare(password, user.password);
+	const credentials = { id: user.id, name: user.name };
+
+	return { isValid, credentials };
+};
 
 var options = {
 	state: {
@@ -16,8 +41,6 @@ var options = {
 		}
 	}
 };
-
-//console.log('constantes index: ', constants);
 
 var host = constants.application['host'];
 var port = constants.application['port'];
@@ -33,10 +56,6 @@ server.ext('onRequest', (request, next) => {
 	return next.continue;
 });
 
-for (var route in routes) {
-	server.route(routes[route]);
-}
-
 module.exports = server;
 
 const swaggerOptions = {
@@ -47,10 +66,24 @@ const swaggerOptions = {
 };
 
 if (process.env.NODE_ENV !== 'test') {
-	server.register([Inert, Vision, {
-		plugin: HapiSwagger,
-		options: swaggerOptions
-	}
-	]).then(() => server.start())
+	server.register(
+		[
+			Inert,
+			Vision,
+			HapiBasicAuth,
+			{
+				plugin: HapiSwagger,
+				options: swaggerOptions
+			}
+		]
+		).then(() => {
+			server.auth.strategy('simple', 'basic', { validate });
+
+			for (var route in routes) {
+				server.route(routes[route]);
+			}
+			
+			server.start()
+		});
 	console.log('Server running in port #' + port);
 }
