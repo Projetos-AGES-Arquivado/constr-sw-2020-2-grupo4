@@ -2,7 +2,7 @@
 
 var Hapi = require('@hapi/hapi');
 var constants = require('./src/config/constants.js');
-var ClassRoutes = require('./src/route/ClassRoutes');
+var routes = require('./src/route/ClassRoutes')();
 //var _ = require('underscore');
 
 var options = {
@@ -17,6 +17,7 @@ var options = {
 
 var host = constants.application['host'];
 var port = constants.application['port'];
+
 const server = new Hapi.Server({ host:host, port: port });
 
 server.ext('onRequest', (request, next) => {
@@ -28,8 +29,7 @@ server.ext('onRequest', (request, next) => {
 	return next.continue;
 });
 
-// Add all the routes within the routes folder
-for (var route in ClassRoutes) {
+for (var route in routes) {
 	server.route(routes[route]);
 }
 

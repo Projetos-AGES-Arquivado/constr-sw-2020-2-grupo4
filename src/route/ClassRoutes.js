@@ -25,14 +25,14 @@ module.exports = () => {
             method: 'GET',
             path: '/class/{classId}',
             config: {
-                handler: ClassController.findBydId
+                handler: () => {}
             }
         },
         {
             method: 'POST',
             path: '/class',
             config: {
-                handler: ClassController.createClass
+                handler: () => {}
             }
         }
     ];

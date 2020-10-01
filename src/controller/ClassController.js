@@ -10,7 +10,6 @@ var Q = require('q');
 function ClassController(){};
 ClassController.prototype = (function(){
 
-
 })();
 
 module.exports = new ClassController();
