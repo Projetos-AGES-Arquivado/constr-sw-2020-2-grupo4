@@ -2,7 +2,7 @@
 
 var Hapi = require('@hapi/hapi');
 var constants = require('./src/config/constants.js');
-var routes = require('./src/route/ClassRoutes')();
+var routes = require('./src/route/ClassRoutes');
 const Inert = require('@hapi/inert');
 const Vision = require('@hapi/vision');
 const HapiBasicAuth = require('@hapi/basic');
@@ -79,9 +79,7 @@ if (process.env.NODE_ENV !== 'test') {
 		).then(() => {
 			server.auth.strategy('simple', 'basic', { validate });
 
-			for (var route in routes) {
-				server.route(routes[route]);
-			}
+			server.route(routes);
 			
 			server.start()
 		});
