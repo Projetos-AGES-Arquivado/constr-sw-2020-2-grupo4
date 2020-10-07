@@ -81,5 +81,26 @@ module.exports = [
                 }
             }
         }
+    },
+    {
+        method: "POST",
+        path: "/class",
+        options: {
+            auth: "simple",
+            description: "Register new class",
+            notes: "Register a class",
+            tags: ["api"],
+            handler: async (request, resp) => {
+                try {
+                    console.log('request ', request.payload)
+
+                    
+
+                    return resp.response(data);
+                } catch (error) {
+                    return resp.response(error).code(500);
+                }
+            }
+        }
     }
 ];
