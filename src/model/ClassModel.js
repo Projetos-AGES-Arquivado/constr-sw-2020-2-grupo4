@@ -3,9 +3,9 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
 //const RoomModel = require('./RoomModel');
-const { Schema } = mongoose;
+//const { Schema } = mongoose;
 
-const ClassModel = new Schema({
+const ClassModel = mongoose.model('Class', {
     description: {
         type: String,
         required: false

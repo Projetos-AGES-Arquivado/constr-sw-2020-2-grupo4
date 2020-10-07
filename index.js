@@ -40,9 +40,9 @@ const { host : databaseHost, database: databaseName } = constants.database;
 
 const server = new Hapi.Server({ host: host, port: port });
 
-console.log(`mongodb://${databaseHost}/${databaseName}`);
+console.log('MONGO: ', `mongodb://${databaseHost}${databaseName}`);
 
-mongoose.connect(`mongodb://${databaseHost}${databaseName}`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb://admin:admin@${databaseHost}${databaseName}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 server.ext('onRequest', (request, next) => {
 	request.plugins.createControllerParams = function (requestParams) {

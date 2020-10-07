@@ -3,16 +3,15 @@
 var Hapi = require('@hapi/hapi');
 var Q = require('q');
 
+var ClassService = require('../service/ClassService.js');
+module.exports = {
+   async insertController (data) {
 
-function ClassController(){};
-ClassController.prototype = (function(){
+      console.log('data ', data);
 
-    return {
-		insert: function insert(request, reply) {
+      const resposta = await ClassService.insertService('data');
 
-		},
-    }
+      return resposta;
+  }
+}
 
-})();
-
-module.exports = new ClassController();

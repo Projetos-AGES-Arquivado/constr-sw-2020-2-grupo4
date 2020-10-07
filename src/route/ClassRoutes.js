@@ -1,8 +1,5 @@
 "use strict"
-
-var ClassController = require("../controller/ClassController");
-/** TODO: Create validation scheme for model. */
-//var classValidate = require("src/validate/class");
+var ClassController = require('../controller/ClassController.js');
 
 module.exports = [
     {
@@ -94,9 +91,9 @@ module.exports = [
                 try {
                     console.log('request ', request.payload)
 
-                    
+                    const resposta = await ClassController.insertController(request.payload);
 
-                    return resp.response(data);
+                    return resp.response(resposta);
                 } catch (error) {
                     return resp.response(error).code(500);
                 }
