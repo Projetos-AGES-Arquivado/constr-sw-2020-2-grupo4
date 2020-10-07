@@ -36,10 +36,13 @@ const validate = async (request, username, password) => {
 
 
 const { host, port } = constants.application;
-const { databaseHost, databaseName } = constants.database;
+const { host : databaseHost, database: databaseName } = constants.database;
 
 const server = new Hapi.Server({ host: host, port: port });
-mongoose.connect(`mongodb://${databaseHost}/${databaseName}`, { useNewUrlParser: true, useUnifiedTopology: true });
+
+console.log(`mongodb://${databaseHost}/${databaseName}`);
+
+mongoose.connect(`mongodb://${databaseHost}${databaseName}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 server.ext('onRequest', (request, next) => {
 	request.plugins.createControllerParams = function (requestParams) {

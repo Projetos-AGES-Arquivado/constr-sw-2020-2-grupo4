@@ -1,12 +1,12 @@
 {
     "dev": {
-        "host": "mongodb://localhost/",
+        "host": "localhost/",
         "user" : "root",
         "password" : "foot",
         "database": "class"
     },
     "prod": {
-        "host": "mongodb://localhost/", 
+        "host": "localhost/", 
         "user" : "root",
         "password" : "foot",
         "database": "class"
