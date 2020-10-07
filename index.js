@@ -9,8 +9,8 @@ const HapiBasicAuth = require('@hapi/basic');
 const Pack = require('./package');
 const HapiSwagger = require('hapi-swagger');
 const Bcrypt = require('bcrypt');
-//var _ = require('underscore');
-//console.log('constantes index: ', constants);
+const mongoose = require('mongoose');
+const { database } = require('./src/config/constants.js');
 
 const users = {
 	admin: {
@@ -34,18 +34,12 @@ const validate = async (request, username, password) => {
 	return { isValid, credentials };
 };
 
-var options = {
-	state: {
-		cookies: {
-			strictHeader: false
-		}
-	}
-};
 
-var host = constants.application['host'];
-var port = constants.application['port'];
+const { host, port } = constants.application;
+const { databaseHost, databaseName } = constants.database;
 
 const server = new Hapi.Server({ host: host, port: port });
+mongoose.connect(`mongodb://${databaseHost}/${databaseName}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 server.ext('onRequest', (request, next) => {
 	request.plugins.createControllerParams = function (requestParams) {
