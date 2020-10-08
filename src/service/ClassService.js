@@ -18,7 +18,7 @@ const insertService = async (data) => {
     return result
 }
 
-const getClassService = async (id) => {
+const getClassWithIdService = async (id) => {
     //get class with id
     try {
         result = await ClassModel.findById(id).exec();
@@ -69,7 +69,7 @@ const updateClassWithIdService = async (id, payload) => {
 }
 
 exports.insertService = insertService;
-exports.getClassService = getClassService;
+exports.getClassWithIdService = getClassWithIdService;
 exports.getAllClassesService = getAllClassesService;
 exports.deleteClassWithIdService = deleteClassWithIdService;
 exports.updateClassWithIdService = updateClassWithIdService;

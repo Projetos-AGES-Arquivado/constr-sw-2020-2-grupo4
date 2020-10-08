@@ -18,7 +18,7 @@ module.exports = {
 
       console.log('id ', id);
 
-      const response = await ClassService.getClassService(id);
+      const response = await ClassService.getClassWithIdService(id);
 
       return response;
    },
