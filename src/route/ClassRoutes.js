@@ -33,7 +33,7 @@ module.exports = [
             tags: ["api"],
             handler: async (request, resp) => {
                 try {
-                    const classModel = await ClassController.getClass(request.params.id);
+                    let classModel = await ClassController.getClass(request.params.id);
                     var response = {
                         success: "true",
                         message: "Class retrieved successfully",
@@ -51,7 +51,7 @@ module.exports = [
         path:"/class/{id}",
         handler: async (request, res) => {
             try{
-                const classModel = await ClassController.deleteClassWithId(request.params.id);
+                let classModel = await ClassController.deleteClassWithId(request.params.id);
                 let data = {
                     status: "success",
                     message: "Class deleted successfully",
@@ -68,7 +68,7 @@ module.exports = [
         path:"/class/{id}",
         handler: async (request, res) => {
             try{
-                const classModel = await ClassController.updateClassWithId(request.params.id, request.payload);
+                let classModel = await ClassController.updateClassWithId(request.params.id, request.payload);
                 let data = {
                     status: "success",
                     message: "Class updated successfully",
@@ -114,7 +114,7 @@ module.exports = [
             handler: async (request, resp) => {
                 try {
                     console.log('request ', request.payload)
-                    const response = await ClassController.insertController(request.payload);
+                    let response = await ClassController.insertController(request.payload);
                     var data = {
                         success: "true",
                         message: "Class created successfully",
