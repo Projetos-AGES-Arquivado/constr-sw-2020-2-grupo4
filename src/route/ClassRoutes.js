@@ -1,4 +1,5 @@
 "use strict"
+const joi = require('joi');
 var ClassController = require('../controller/ClassController.js');
 
 module.exports = [
@@ -111,6 +112,15 @@ module.exports = [
             description: "Register new class",
             notes: "Register a class",
             tags: ["api"],
+            validate: {
+                payload: joi.object({
+                    description : joi.string().required(),
+                    content: joi.string().required()
+                }),
+                failAction: (request, resp, error) => {
+                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
+                }
+            },
             handler: async (request, resp) => {
                 try {
                     console.log('request ', request.payload)
