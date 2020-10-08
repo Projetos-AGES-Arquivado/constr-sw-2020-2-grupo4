@@ -9,9 +9,9 @@ module.exports = {
 
       console.log('data ', data);
 
-      const resposta = await ClassService.insertService('data');
+      const response = await ClassService.insertService(data);
 
-      return resposta;
+      return response;
   }
 }
 

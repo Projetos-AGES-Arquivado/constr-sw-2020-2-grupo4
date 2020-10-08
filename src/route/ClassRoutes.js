@@ -90,10 +90,13 @@ module.exports = [
             handler: async (request, resp) => {
                 try {
                     console.log('request ', request.payload)
-
-                    const resposta = await ClassController.insertController(request.payload);
-
-                    return resp.response(resposta);
+                    const response = await ClassController.insertController(request.payload);
+                    var data = {
+                        success: "true",
+                        message: "Class created successfully",
+                        class: response
+                    }
+                    return resp.response(data);
                 } catch (error) {
                     return resp.response(error).code(500);
                 }
