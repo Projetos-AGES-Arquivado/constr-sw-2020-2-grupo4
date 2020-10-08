@@ -47,6 +47,23 @@ module.exports = [
         }
     },
     {
+        method:"DELETE",
+        path:"/class/{id}",
+        handler: async (request, res) => {
+            try{
+                const classModel = await ClassController.deleteClassWithId(request.params.id);
+                let data = {
+                    status: "success",
+                    message: "Class deleted successfully",
+                    data: classModel
+                }
+                return res.response(data);
+            } catch(error) {
+               return resp.response(error).code(500);
+            }
+        }
+    },
+    {
         method: "GET",
         path: "/class",
         options: {

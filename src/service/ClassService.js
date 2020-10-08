@@ -1,5 +1,6 @@
 
 
+const { async } = require('q');
 //mongoose
 var ClassModel = require('../model/ClassModel');
 
@@ -37,6 +38,17 @@ const getAllClassesService = async () => {
     return result
 }
 
+const deleteClassWithIdService = async (id) => {
+    //delete class
+    try {
+        result = await ClassModel.findByIdAndDelete(id);
+    } catch (error) {
+        console.log('error ', error);
+    }
+    return result
+}
+
 exports.insertService = insertService;
 exports.getClassService = getClassService;
 exports.getAllClassesService = getAllClassesService;
+exports.deleteClassWithIdService = deleteClassWithIdService;

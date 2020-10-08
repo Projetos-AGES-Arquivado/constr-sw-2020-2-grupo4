@@ -28,7 +28,13 @@ module.exports = {
       const response = await ClassService.getAllClassesService();
 
       return response;
-   }
+   },
 
+   async deleteClassWithId(id) {
+
+      const response = await ClassService.deleteClassWithIdService(id);
+
+      return response;
+   }
 }
 
