@@ -39,6 +39,7 @@ const { host, port } = constants.application;
 const { host : databaseHost, database: databaseName } = constants.database;
 
 const server = new Hapi.Server({ host: host, port: port });
+server.realm.modifiers.route.prefix = '/api/v1'
 
 console.log('MONGO: ', `mongodb://${databaseHost}${databaseName}`);
 
@@ -56,6 +57,8 @@ server.ext('onRequest', (request, next) => {
 module.exports = server;
 
 const swaggerOptions = {
+	basePath: '/api/v1',
+	pathPrefixSize: 2,
 	info: {
 		title: 'Aulas Documentation',
 		version: Pack.version,
@@ -70,7 +73,10 @@ if (process.env.NODE_ENV !== 'test') {
 			HapiBasicAuth,
 			{
 				plugin: HapiSwagger,
-				options: swaggerOptions
+				options: swaggerOptions,
+				routes: {
+					prefix: '/api/v1' 
+				}
 			}
 		]
 		).then(() => {
