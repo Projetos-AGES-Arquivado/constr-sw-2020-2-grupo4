@@ -12,6 +12,15 @@ module.exports = {
       const response = await ClassService.insertService(data);
 
       return response;
-  }
+  },
+  
+  async getClass (id) {
+
+   console.log('id ', id);
+
+   const response = await ClassService.getClassService(id);
+
+   return response;
+}
 }
 

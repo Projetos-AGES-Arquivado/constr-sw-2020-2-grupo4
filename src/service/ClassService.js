@@ -17,4 +17,15 @@ const insertService = async (data) => {
     return result
 }
 
+const getClassService = async (id) => {
+    //get class with id
+    try {
+    result = await ClassModel.findById(id).exec();
+    } catch(error) {
+        console.log('error ', error);
+    }
+    return result
+}
+
 exports.insertService = insertService;
+exports.getClassService = getClassService;

@@ -25,7 +25,7 @@ module.exports = [
     },
     {
         method: "GET",
-        path: "/class/{classId}",
+        path: "/class/{id}",
         options: {
             auth: "simple",
             description: "Returns a class with given ID",
@@ -33,11 +33,13 @@ module.exports = [
             tags: ["api"],
             handler: async (request, resp) => {
                 try {
-                    var data = {
+                    const classModel = await ClassController.getClass(request.params.id);
+                    var response = {
                         success: "true",
-                        message: "Hello world"
+                        message: "Class retrieved successfully",
+                        data: classModel
                     }
-                    return resp.response(data);
+                    return resp.response(response);
                 } catch (error) {
                     return resp.response(error).code(500);
                 }
@@ -94,7 +96,7 @@ module.exports = [
                     var data = {
                         success: "true",
                         message: "Class created successfully",
-                        class: response
+                        data: response
                     }
                     return resp.response(data);
                 } catch (error) {
