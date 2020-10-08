@@ -10,7 +10,7 @@ module.exports = [
             auth: "simple",
             description: "Index endpoint to test if application is up and running",
             notes: "Returns a hello world",
-            tags: ["api"],
+            tags: ["api", "Health"],
             handler: async (request, resp) => {
                 try {
                     var data = {
@@ -31,7 +31,7 @@ module.exports = [
             auth: "simple",
             description: "Returns a class with given ID",
             notes: "Returns class information with given ID",
-            tags: ["api"],
+            tags: ["api", "Class"],
             validate: {
                 params: joi.object({ 
                     id: joi.string().required()
@@ -62,7 +62,7 @@ module.exports = [
             auth: "simple",
             description: "Deletes a class with given ID",
             notes: "Deletes a class information with given ID",
-            tags: ["api"],
+            tags: ["api", "Class"],
             validate: {
                 params: joi.object({ 
                     id: joi.string().required()
@@ -93,7 +93,7 @@ module.exports = [
             auth: "simple",
             description: "Deletes all classes",
             notes: "Deletes all classes from database",
-            tags: ["api"],
+            tags: ["api", "Class"],
             handler: async (request, res) => {
                 try {
                     let classModel = await ClassController.deleteAllClassesController();
@@ -116,7 +116,7 @@ module.exports = [
             auth: "simple",
             description: "Updates class info with given ID",
             notes: "Updates class info with given ID",
-            tags: ["api"],
+            tags: ["api", "Class"],
             validate: {
                 params: joi.object({ 
                     id: joi.string().required()
@@ -154,7 +154,7 @@ module.exports = [
             auth: "simple",
             description: "Returns all classes",
             notes: "Returns all registered classes",
-            tags: ["api"],
+            tags: ["api", "Class"],
             handler: async (request, resp) => {
                 try {
                     let classes = await ClassController.getAllClassesController();
@@ -177,7 +177,7 @@ module.exports = [
             auth: "simple",
             description: "Register new class",
             notes: "Register a class",
-            tags: ["api"],
+            tags: ["api", "Class"],
             validate: {
                 payload: joi.object({
                     description: joi.string().required(),

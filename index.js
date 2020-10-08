@@ -58,11 +58,22 @@ module.exports = server;
 
 const swaggerOptions = {
 	basePath: '/api/v1',
+    grouping: "tags",
 	pathPrefixSize: 2,
 	info: {
 		title: 'Aulas Documentation',
 		version: Pack.version,
 	},
+	tags: [
+		{
+			name: "Class",
+			description: "All Class related endpoints"
+		},
+		{
+			name: "Health",
+			description: "API health check"
+		}
+	]
 };
 
 if (process.env.NODE_ENV !== 'test') {
