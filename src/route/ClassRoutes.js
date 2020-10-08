@@ -48,53 +48,71 @@ module.exports = [
         }
     },
     {
-        method:"DELETE",
-        path:"/class/{id}",
-        handler: async (request, res) => {
-            try{
-                let classModel = await ClassController.deleteClassWithId(request.params.id);
-                let data = {
-                    status: "success",
-                    message: "Class deleted successfully",
-                    data: classModel
+        method: "DELETE",
+        path: "/class/{id}",
+        options: {
+            auth: "simple",
+            description: "Deletes a class with given ID",
+            notes: "Deletes a class information with given ID",
+            tags: ["api"],
+            handler: async (request, res) => {
+                try {
+                    let classModel = await ClassController.deleteClassWithId(request.params.id);
+                    let data = {
+                        status: "success",
+                        message: "Class deleted successfully",
+                        data: classModel
+                    }
+                    return res.response(data);
+                } catch (error) {
+                    return resp.response(error).code(500);
                 }
-                return res.response(data);
-            } catch(error) {
-               return resp.response(error).code(500);
             }
         }
     },
     {
-        method:"DELETE",
-        path:"/class",
-        handler: async (request, res) => {
-            try{
-                let classModel = await ClassController.deleteAllClasses();
-                let data = {
-                    status: "success",
-                    message: "All classes were deleted",
-                    data: classModel
+        method: "DELETE",
+        path: "/class",
+        options: {
+            auth: "simple",
+            description: "Deletes all classes",
+            notes: "Deletes all classes from database",
+            tags: ["api"],
+            handler: async (request, res) => {
+                try {
+                    let classModel = await ClassController.deleteAllClasses();
+                    let data = {
+                        status: "success",
+                        message: "All classes were deleted",
+                        data: classModel
+                    }
+                    return res.response(data);
+                } catch (error) {
+                    return resp.response(error).code(500);
                 }
-                return res.response(data);
-            } catch(error) {
-               return resp.response(error).code(500);
             }
         }
     },
     {
-        method:"PUT",
-        path:"/class/{id}",
-        handler: async (request, res) => {
-            try{
-                let classModel = await ClassController.updateClassWithId(request.params.id, request.payload);
-                let data = {
-                    status: "success",
-                    message: "Class updated successfully",
-                    data: classModel
+        method: "PUT",
+        path: "/class/{id}",
+        options: {
+            auth: "simple",
+            description: "Updates class info with given ID",
+            notes: "Updates class info with given ID",
+            tags: ["api"],
+            handler: async (request, res) => {
+                try {
+                    let classModel = await ClassController.updateClassWithId(request.params.id, request.payload);
+                    let data = {
+                        status: "success",
+                        message: "Class updated successfully",
+                        data: classModel
+                    }
+                    return res.response(data);
+                } catch (error) {
+                    return resp.response(error).code(500);
                 }
-                return res.response(data);
-            } catch(error) {
-               return resp.response(error).code(500);
             }
         }
     },
@@ -131,7 +149,7 @@ module.exports = [
             tags: ["api"],
             validate: {
                 payload: joi.object({
-                    description : joi.string().required(),
+                    description: joi.string().required(),
                     content: joi.string().required()
                 }),
                 failAction: (request, resp, error) => {
