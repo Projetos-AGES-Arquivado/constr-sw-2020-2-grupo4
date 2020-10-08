@@ -14,7 +14,7 @@ module.exports = {
       return response;
    },
 
-   async getClass(id) {
+   async getClassController(id) {
 
       console.log('id ', id);
 
@@ -23,28 +23,28 @@ module.exports = {
       return response;
    },
 
-   async getAllClasses() {
+   async getAllClassesController() {
 
       const response = await ClassService.getAllClassesService();
 
       return response;
    },
 
-   async deleteClassWithId(id) {
+   async deleteClassWithIdController(id) {
 
       const response = await ClassService.deleteClassWithIdService(id);
 
       return response;
    },
 
-   async deleteAllClasses() {
+   async deleteAllClassesController() {
 
       const response = await ClassService.deleteAllClassesService();
 
       return response;
    },
 
-   async updateClassWithId(id, payload) {
+   async updateClassWithIdController(id, payload) {
 
       const response = await ClassService.updateClassWithIdService(id, payload);
 

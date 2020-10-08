@@ -34,7 +34,7 @@ module.exports = [
             tags: ["api"],
             handler: async (request, resp) => {
                 try {
-                    let classModel = await ClassController.getClass(request.params.id);
+                    let classModel = await ClassController.getClassController(request.params.id);
                     var response = {
                         success: "true",
                         message: "Class retrieved successfully",
@@ -57,7 +57,7 @@ module.exports = [
             tags: ["api"],
             handler: async (request, res) => {
                 try {
-                    let classModel = await ClassController.deleteClassWithId(request.params.id);
+                    let classModel = await ClassController.deleteClassWithIdController(request.params.id);
                     let data = {
                         status: "success",
                         message: "Class deleted successfully",
@@ -80,7 +80,7 @@ module.exports = [
             tags: ["api"],
             handler: async (request, res) => {
                 try {
-                    let classModel = await ClassController.deleteAllClasses();
+                    let classModel = await ClassController.deleteAllClassesController();
                     let data = {
                         status: "success",
                         message: "All classes were deleted",
@@ -103,7 +103,7 @@ module.exports = [
             tags: ["api"],
             handler: async (request, res) => {
                 try {
-                    let classModel = await ClassController.updateClassWithId(request.params.id, request.payload);
+                    let classModel = await ClassController.updateClassWithIdController(request.params.id, request.payload);
                     let data = {
                         status: "success",
                         message: "Class updated successfully",
@@ -126,7 +126,7 @@ module.exports = [
             tags: ["api"],
             handler: async (request, resp) => {
                 try {
-                    let classes = await ClassController.getAllClasses();
+                    let classes = await ClassController.getAllClassesController();
                     var response = {
                         success: "true",
                         message: "All classes retrieved successfully",
