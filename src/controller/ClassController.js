@@ -35,6 +35,13 @@ module.exports = {
       const response = await ClassService.deleteClassWithIdService(id);
 
       return response;
+   },
+
+   async updateClassWithId(id, payload) {
+
+      const response = await ClassService.updateClassWithIdService(id, payload);
+
+      return response;
    }
 }
 

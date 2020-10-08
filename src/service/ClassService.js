@@ -48,7 +48,18 @@ const deleteClassWithIdService = async (id) => {
     return result
 }
 
+const updateClassWithIdService = async (id, payload) => {
+    //update class
+    try {
+        result = await ClassModel.findByIdAndUpdate(id, payload, {new : true});
+    } catch (error) {
+        console.log('error ', error);
+    }
+    return result
+}
+
 exports.insertService = insertService;
 exports.getClassService = getClassService;
 exports.getAllClassesService = getAllClassesService;
 exports.deleteClassWithIdService = deleteClassWithIdService;
+exports.updateClassWithIdService = updateClassWithIdService;

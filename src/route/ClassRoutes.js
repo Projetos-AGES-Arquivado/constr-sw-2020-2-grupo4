@@ -64,6 +64,23 @@ module.exports = [
         }
     },
     {
+        method:"PUT",
+        path:"/class/{id}",
+        handler: async (request, res) => {
+            try{
+                const classModel = await ClassController.updateClassWithId(request.params.id, request.payload);
+                let data = {
+                    status: "success",
+                    message: "Class updated successfully",
+                    data: classModel
+                }
+                return res.response(data);
+            } catch(error) {
+               return resp.response(error).code(500);
+            }
+        }
+    },
+    {
         method: "GET",
         path: "/class",
         options: {
