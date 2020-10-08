@@ -56,25 +56,13 @@ module.exports = [
             tags: ["api"],
             handler: async (request, resp) => {
                 try {
-                    //let classes = await ClassModel.find().exec();
-                    let classes = [
-                        {
-                            id: 1,
-                            name: "Programação distribuida",
-                            professor: "Sergio Johann"
-                        },
-                        {
-                            id: 1,
-                            name: "Construção de software",
-                            professor: "Eduardo Arruda"
-                        }
-                    ]
-                    var data = {
+                    let classes = await ClassController.getAllClasses();
+                    var response = {
                         success: "true",
-                        message: "Classes retrieved successfully",
-                        classes: classes
+                        message: "All classes retrieved successfully",
+                        data: classes
                     }
-                    return resp.response(data);
+                    return resp.response(response);
                 } catch (error) {
                     return resp.response(error).code(500);
                 }
