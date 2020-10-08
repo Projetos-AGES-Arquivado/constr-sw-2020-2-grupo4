@@ -14,7 +14,7 @@ module.exports = {
       return response;
    },
 
-   async getClassController(id) {
+   async getClassWithIdController(id) {
 
       console.log('id ', id);
 

@@ -42,7 +42,7 @@ module.exports = [
             },
             handler: async (request, resp) => {
                 try {
-                    let classModel = await ClassController.getClassController(request.params.id);
+                    let classModel = await ClassController.getClassWithIdController(request.params.id);
                     var response = {
                         success: "true",
                         message: "Class retrieved successfully",
