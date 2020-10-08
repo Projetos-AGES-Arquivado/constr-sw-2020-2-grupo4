@@ -65,6 +65,23 @@ module.exports = [
         }
     },
     {
+        method:"DELETE",
+        path:"/class",
+        handler: async (request, res) => {
+            try{
+                let classModel = await ClassController.deleteAllClasses();
+                let data = {
+                    status: "success",
+                    message: "All classes were deleted",
+                    data: classModel
+                }
+                return res.response(data);
+            } catch(error) {
+               return resp.response(error).code(500);
+            }
+        }
+    },
+    {
         method:"PUT",
         path:"/class/{id}",
         handler: async (request, res) => {

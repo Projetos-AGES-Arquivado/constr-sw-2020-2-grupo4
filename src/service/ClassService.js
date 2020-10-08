@@ -48,6 +48,16 @@ const deleteClassWithIdService = async (id) => {
     return result
 }
 
+const deleteAllClassesService = async (id) => {
+    //delete all class
+    try {
+        result = await ClassModel.deleteMany();
+    } catch (error) {
+        console.log('error ', error);
+    }
+    return result
+}
+
 const updateClassWithIdService = async (id, payload) => {
     //update class
     try {
@@ -63,3 +73,4 @@ exports.getClassService = getClassService;
 exports.getAllClassesService = getAllClassesService;
 exports.deleteClassWithIdService = deleteClassWithIdService;
 exports.updateClassWithIdService = updateClassWithIdService;
+exports.deleteAllClassesService = deleteAllClassesService;
