@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 //const RoomModel = require('./RoomModel');
 //const { Schema } = mongoose;
 
-const ClassModel = mongoose.model('Class', {
+const ClassModel = mongoose.model('class', {
     description: {
         type: String,
         required: false

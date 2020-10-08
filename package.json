@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "start": "NODE_ENV=dev nodemon -L index.js",
-    "start:prod": "NODE_ENV=prod node index.js",
+    "start:prod": "NODE_ENV=prod nodemon -L index.js",
     "test": "test"
   },
   "repository": {
