@@ -11,7 +11,8 @@ mongoose.connect("mongodb://admin:admin@localhost:27017", { useNewUrlParser: tru
 
 const init = async () => {
 
-    const server = hapi.server({
+    const ser
+            ver = hapi.server({
         port: 3000,
         host: '0.0.0.0'
     });

@@ -10,6 +10,7 @@ services:
       - '3000:3000'
     volumes: 
       - .:/usr/src/app
+      - /usr/src/app/node_modules/
     command: npm start
     restart: unless-stopped
 
@@ -22,3 +23,4 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: admin
     ports:
       - '27017:27017'
+    restart: unless-stopped
