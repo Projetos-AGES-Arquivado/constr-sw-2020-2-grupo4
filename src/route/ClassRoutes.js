@@ -32,6 +32,14 @@ module.exports = [
             description: "Returns a class with given ID",
             notes: "Returns class information with given ID",
             tags: ["api"],
+            validate: {
+                params: joi.object({ 
+                    id: joi.string().required()
+                }),
+                failAction: (request, resp, error) => {
+                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
+                }
+            },
             handler: async (request, resp) => {
                 try {
                     let classModel = await ClassController.getClassController(request.params.id);
@@ -55,6 +63,14 @@ module.exports = [
             description: "Deletes a class with given ID",
             notes: "Deletes a class information with given ID",
             tags: ["api"],
+            validate: {
+                params: joi.object({ 
+                    id: joi.string().required()
+                }),
+                failAction: (request, resp, error) => {
+                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
+                }
+            },
             handler: async (request, res) => {
                 try {
                     let classModel = await ClassController.deleteClassWithIdController(request.params.id);
@@ -101,6 +117,21 @@ module.exports = [
             description: "Updates class info with given ID",
             notes: "Updates class info with given ID",
             tags: ["api"],
+            validate: {
+                params: joi.object({ 
+                    id: joi.string().required()
+                }),
+                payload: joi.object({
+                    description: joi.string().optional(),
+                    content: joi.string().optional(),
+                    room: joi.string().optional(),
+                    team: joi.string().optional(),
+                    evaluation: joi.string().optional()
+                }),
+                failAction: (request, resp, error) => {
+                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
+                }
+            },
             handler: async (request, res) => {
                 try {
                     let classModel = await ClassController.updateClassWithIdController(request.params.id, request.payload);
@@ -150,7 +181,10 @@ module.exports = [
             validate: {
                 payload: joi.object({
                     description: joi.string().required(),
-                    content: joi.string().required()
+                    content: joi.string().required(),
+                    room: joi.string().optional(),
+                    team: joi.string().optional(),
+                    evaluation: joi.string().optional()
                 }),
                 failAction: (request, resp, error) => {
                     return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
