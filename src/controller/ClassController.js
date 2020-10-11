@@ -4,6 +4,8 @@ var Hapi = require('@hapi/hapi');
 var Q = require('q');
 
 var ClassService = require('../service/ClassService.js');
+var ClassServiceFake = require('../service/ClassServiceFake.js');
+
 module.exports = {
    async insertController(data) {
 
@@ -15,9 +17,6 @@ module.exports = {
    },
 
    async getClassWithIdController(id) {
-
-      console.log('id ', id);
-
       const response = await ClassService.getClassWithIdService(id);
 
       return response;
@@ -47,6 +46,32 @@ module.exports = {
    async updateClassWithIdController(id, payload) {
 
       const response = await ClassService.updateClassWithIdService(id, payload);
+
+      return response;
+   },
+
+   async getContentsByClassId(id) {
+      
+      const response = await ClassServiceFake.getContentsByClassId(id);
+
+      return response;
+
+   },
+
+   async getEvaluationsByClassId(id) {
+      const response = await ClassServiceFake.getEvaluationsByClassId(id);
+
+      return response;
+   },
+
+   async getRoomsByClassId(id) {
+      const response = await ClassServiceFake.getRoomByClassId(id);
+      
+      return response;
+   },
+
+   async getTeamsByClassId(id) {
+      const response = await ClassServiceFake.getTeamsByClassId(id);
 
       return response;
    }
