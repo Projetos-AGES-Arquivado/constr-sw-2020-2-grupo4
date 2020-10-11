@@ -3,43 +3,43 @@ var mongoose = require('mongoose');
     const getAllTeams = async () => {
         return [
             {
-                _id: 'idjbjdsfds',
+                _id: new mongoose.mongo.ObjectId(),
                 year: 2020,
                 semester: 2,
                 period: ['2', 'JK'],
                 room: 'id_room',
                 students: ['id_student1', 'id_student2', 'id_student3'],
-                class: ['id_class1', 'id_class2', 'id_class3'],
+                class: ['5f8251631e35b9c347821094', '5f8251865e89f98fe5f91d4d'],
                 professor: 'id_professor'
             },
             {
-                _id: 'id2',
+                _id: new mongoose.mongo.ObjectId(),
                 year: 2020,
                 semester: 1,
                 period: ['2', 'JK'],
                 room: 'id_room',
                 students: ['id_student1', 'id_student2', 'id_student3'],
-                class: ['id_class1', 'id_class2', 'id_class3'],
+                class: ['5f8251865e89f98fe5f91d4d', '5f8251a7f7b6f2bf8f8c299e'],
                 professor: 'id_professor'
             },
             {
-                _id: 'id3',
+                _id: new mongoose.mongo.ObjectId(),
                 year: 2019,
                 semester: 2,
                 period: ['2', 'JK'],
                 room: 'id_room',
                 students: ['id_student1', 'id_student2', 'id_student3'],
-                class: ['id_class1', 'id_class2', 'id_class3'],
+                class: ['5f8251631e35b9c347821094', '5f8251a7f7b6f2bf8f8c299e'],
                 professor: 'id_professor'
             },
             {
-                _id: 'id4',
+                _id: new mongoose.mongo.ObjectId(),
                 year: 2019,
                 semester: 1,
                 period: ['2', 'JK'],
                 room: 'id_room',
                 students: ['id_student1', 'id_student2', 'id_student3'],
-                class: ['id_class4', 'id_class3', 'id_class5'],
+                class: ['5f8251631e35b9c347821094', '5f8251631e35b9c347821094', '5f8251865e89f98fe5f91d4d'],
                 professor: 'id_professor'
             },
         ]

@@ -7,7 +7,7 @@ var mongoose = require('mongoose');
             name: 'Avaliacao de BD',
             score: 100.0,
             description: 'Avaliação realizada no laboratório',
-            class: 'id3',
+            class: '5f8251631e35b9c347821094',
             type: 'G1',
             questions: [
                 {
@@ -36,7 +36,7 @@ var mongoose = require('mongoose');
                 _id: new mongoose.mongo.ObjectId(),
                 name: 'Avaliacao de BD',
                 score: 100.0,
-                class: 'id2',
+                class: '5f8251631e35b9c347821094',
                 description: 'Avaliação realizada no laboratório',
                 type: 'G1',
                 questions: [
@@ -66,7 +66,7 @@ var mongoose = require('mongoose');
                     _id: new mongoose.mongo.ObjectId(),
                     name: 'Avaliacao de BD',
                     score: 100.0,
-                    class: 'id1',
+                    class: '5f8251a7f7b6f2bf8f8c299e',
                     description: 'Avaliação realizada no laboratório',
                     type: 'G1',
                     questions: [

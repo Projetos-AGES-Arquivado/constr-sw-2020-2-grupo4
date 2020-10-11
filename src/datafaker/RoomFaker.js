@@ -17,7 +17,7 @@ var mongoose = require('mongoose');
                 name: 'Projetor',
                 quantity: 1
             }],
-            classes: ['12345', '54321', '93481']
+            classes: ['5f8251a7f7b6f2bf8f8c299e', '5f8251631e35b9c347821094']
         },
         {
             _id: new mongoose.mongo.ObjectId(),
@@ -34,7 +34,7 @@ var mongoose = require('mongoose');
                 name: 'Quadro branco',
                 quantity: 1
             }],
-            classes: ['12345', '54321', '93481']
+            classes: ['5f8251942c42fa47ae09f7eb', '5f8251a7f7b6f2bf8f8c299e']
         },
         {
             _id: new mongoose.mongo.ObjectId(),
@@ -51,7 +51,7 @@ var mongoose = require('mongoose');
                 name: 'Projetor',
                 quantity: 1
             }],
-            classes: ['12345', '54321', '93481']
+            classes: ['5f8251631e35b9c347821094']
         },
         {
             _id: new mongoose.mongo.ObjectId(),
@@ -68,7 +68,7 @@ var mongoose = require('mongoose');
                 name: 'Projetor',
                 quantity: 1
             }],
-            classes: ['12345', '54321', '93481']
+            classes: ['5f8251631e35b9c347821094', '5f8251942c42fa47ae09f7eb']
         },
         {
             _id: new mongoose.mongo.ObjectId(),
@@ -85,7 +85,7 @@ var mongoose = require('mongoose');
                 name: 'Projetor',
                 quantity: 1
             }],
-            classes: ['54321', '93481']
+            classes: ['5f8251942c42fa47ae09f7eb', '5f8251865e89f98fe5f91d4d']
         },
     ]
     }

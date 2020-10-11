@@ -3,49 +3,55 @@ var mongoose = require('mongoose');
     const getAllContents = async () => {
         return [
             {
-                _id: 'id',
+                _id: mongoose.mongo.ObjectId(),
                 name: 'Banco de Dados I',
-                description: 'Descrição sobre o conteúdo de banco de dados Oracle',
-                classes: ['id1', 'id2', 'id3', 'id4'],
+                description: 'Conteúdo sobre INSERT, DELETE e UPDATE',
+                classes: [
+                    '5f8251631e35b9c347821094',
+                    '5f8251865e89f98fe5f91d4d',
+                    '5f8251942c42fa47ae09f7eb',
+                    '5f8251a7f7b6f2bf8f8c299e'
+                ],
+
                 materials: [
                     {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
+                        _id: '5f8251a7f7b6f2bf8f8c299e',
+                        description: 'Explicação sobre DML - Prof. Eduardo Arruda',
                         url: 'www.biblioteca.com.br'
                     },
                     {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
+                        _id: '5f8251a7f7b6f2bf8f8c299e',
+                        description: 'Explicação sobre INSERT - Prof. Eduardo Arruda e Daniel Callegari',
                         url: 'www.biblioteca.com.br'
                     },
                     {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
+                        _id: '5f8251a7f7b6f2bf8f8c299e',
+                        description: 'ORACLE Database - Prof. Daniel Callegari',
                         url: 'www.biblioteca.com.br'
                     },
                     {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
+                        _id: '5f8251a7f7b6f2bf8f8c299e',
+                        description: 'MySQL Database - Prof. Eduardo Arruda',
                         url: 'www.biblioteca.com.br'
                     },
                     {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
+                        _id: '5f8251a7f7b6f2bf8f8c299e',
+                        description: 'No-SQL - Prof. Eduardo Arruda',
                         url: 'www.biblioteca.com.br'
                     },
                 ],
                 bibliography: [
                     {
-                        _id: 'id',
-                        name: 'Engenheria de Software - Sommerville'
+                        _id: '5f8251a7f7b6f2bf8f8c299e',
+                        name: 'Banco de Dados - Teoria e Prática'
                     },
                     {
-                        _id: 'id',
-                        name: 'Engenharia de Requisitos - Marczakville'
+                        _id: '5f8251a7f7b6f2bf8f8c299e',
+                        name: 'Oracle BD - The Definitive Guide'
                     },
                     {
-                        _id: 'id',
-                        name: 'Engenharia de Banco de Dados - Callegariville'
+                        _id: '5f8251a7f7b6f2bf8f8c299e',
+                        name: 'MySQL for Dummies'
                     }
                     
                 ]
@@ -53,49 +59,28 @@ var mongoose = require('mongoose');
             {
                 _id: 'id',
                 name: 'Banco de Dados II',
-                description: 'Descrição sobre o conteúdo de banco de dados Oracle AVANÇADO',
-                classes: ['id1', 'id4', 'id5', 'id6', 'id7'],
+                description: 'Inner, full, left e right joins',
+                classes: [
+                    '5f8251631e35b9c347821094',
+                    '5f8251865e89f98fe5f91d4d'
+                ],
                 materials: [
                     {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
+                        _id: '5f8251865e89f98fe5f91d4d',
+                        description: 'Video aula sobre INNER JOIN - Prof. Daniel Callegari',
                         url: 'www.biblioteca.com.br'
                     },
                     {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
-                        url: 'www.biblioteca.com.br'
-                    },
-                    {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
-                        url: 'www.biblioteca.com.br'
-                    },
-                    {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
-                        url: 'www.biblioteca.com.br'
-                    },
-                    {
-                        _id: 'id',
-                        description: 'Alguma descrição sobre o material 1',
+                        _id: '5f8251865e89f98fe5f91d4d',
+                        description: 'Video aula sobre LEFT e RIGH JOINS - Prof. Eduardo Arruda',
                         url: 'www.biblioteca.com.br'
                     },
                 ],
                 bibliography: [
                     {
-                        _id: 'id',
-                        name: 'Engenheria de Software - Sommerville'
-                    },
-                    {
-                        _id: 'id',
-                        name: 'Engenharia de Requisitos - Marczakville'
-                    },
-                    {
-                        _id: 'id',
-                        name: 'Engenharia de Banco de Dados - Callegariville'
-                    }
-                    
+                        _id: '5f8251865e89f98fe5f91d4d',
+                        name: 'JOINS - The Definitive Guide'
+                    },                   
                 ]
             }
         ]
