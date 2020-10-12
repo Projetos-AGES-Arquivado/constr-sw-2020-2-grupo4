@@ -5,7 +5,7 @@ var ClassController = require('../controller/ClassController.js');
 module.exports = [
     {
         method: "GET",
-        path: "/index",
+        path: "/",
         options: {
             auth: "simple",
             description: "Index endpoint to test if application is up and running",
@@ -26,7 +26,7 @@ module.exports = [
     },
     {
         method: "GET",
-        path: "/class/{id}",
+        path: "/classes/{id}",
         options: {
             auth: "simple",
             description: "Returns a class with given ID",
@@ -57,7 +57,7 @@ module.exports = [
     },
     {
         method: "DELETE",
-        path: "/class/{id}",
+        path: "/classes/{id}",
         options: {
             auth: "simple",
             description: "Deletes a class with given ID",
@@ -88,7 +88,7 @@ module.exports = [
     },
     {
         method: "DELETE",
-        path: "/class",
+        path: "/classes",
         options: {
             auth: "simple",
             description: "Deletes all classes",
@@ -111,7 +111,7 @@ module.exports = [
     },
     {
         method: "PUT",
-        path: "/class/{id}",
+        path: "/classes/{id}",
         options: {
             auth: "simple",
             description: "Updates class info with given ID",
@@ -149,7 +149,7 @@ module.exports = [
     },
     {
         method: "GET",
-        path: "/class",
+        path: "/classes",
         options: {
             auth: "simple",
             description: "Returns all classes",
@@ -172,7 +172,7 @@ module.exports = [
     },
     {
         method: "POST",
-        path: "/class",
+        path: "/classes",
         options: {
             auth: "simple",
             description: "Register new class",
@@ -205,5 +205,102 @@ module.exports = [
                 }
             }
         }
-    }
+    },
+    {
+        method: "GET",
+        path: "/classes/{id}/content",
+        options: {
+            auth: "simple",
+            description: "Returns all contents from a class",
+            notes: "Returns all contents for a class",
+            tags: ["api", "Class", "Contents"],
+            handler: async (request, resp) => {
+                try {
+                    const id = request.params.id;
+                    const contents = await ClassController.getContentsByClassId(id);
+                    var response = {
+                        success: "true",
+                        message: `All contents from class ${id} retrieved successfully`,
+                        data: contents
+                    }
+                    return resp.response(response);
+                } catch (error) {
+                    return resp.response(error).code(500);
+                }
+            }
+        }
+    },
+    {
+        method: "GET",
+        path: "/classes/{id}/evaluations",
+        options: {
+            auth: "simple",
+            description: "Returns all evaluations from a class",
+            notes: "Returns all evaluations for a class",
+            tags: ["api", "Class", "Evaluations"],
+            handler: async (request, resp) => {
+                try {
+                    const id = request.params.id;
+                    const contents = await ClassController.getEvaluationsByClassId(id);
+                    var response = {
+                        success: "true",
+                        message: `All evaluations from class ${id} retrieved successfully`,
+                        data: contents
+                    }
+                    return resp.response(response);
+                } catch (error) {
+                    return resp.response(error).code(500);
+                }
+            }
+        }
+    },
+    {
+        method: "GET",
+        path: "/classes/{id}/rooms",
+        options: {
+            auth: "simple",
+            description: "Returns all rooms from a class",
+            notes: "Returns all rooms for a class",
+            tags: ["api", "Class", "Rooms"],
+            handler: async (request, resp) => {
+                try {
+                    const id = request.params.id;
+                    const contents = await ClassController.getRoomsByClassId(id);
+                    var response = {
+                        success: "true",
+                        message: `All rooms from class ${id} retrieved successfully`,
+                        data: contents
+                    }
+                    return resp.response(response);
+                } catch (error) {
+                    return resp.response(error).code(500);
+                }
+            }
+        }
+    },
+    {
+        method: "GET",
+        path: "/classes/{id}/teams",
+        options: {
+            auth: "simple",
+            description: "Returns all teams from a class",
+            notes: "Returns all teams for a class",
+            tags: ["api", "Class", "Teams"],
+            handler: async (request, resp) => {
+                try {
+                    const id = request.params.id;
+                    const contents = await ClassController.getTeamsByClassId(id);
+                    var response = {
+                        success: "true",
+                        message: `All teams from class ${id} retrieved successfully`,
+                        data: contents
+                    }
+                    return resp.response(response);
+                } catch (error) {
+                    return resp.response(error).code(500);
+                }
+            }
+        }
+    },
+
 ];

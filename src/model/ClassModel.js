@@ -1,9 +1,6 @@
 "use strict"
 
-const Joi = require('joi');
 const mongoose = require('mongoose');
-//const RoomModel = require('./RoomModel');
-//const { Schema } = mongoose;
 
 const ClassModel = mongoose.model('class', {
     description: {
@@ -25,6 +22,10 @@ const ClassModel = mongoose.model('class', {
     evaluation: {
         type: String,
         required: false
+    },
+    date: {
+        type: Date,
+        required: true
     }
 });
 
