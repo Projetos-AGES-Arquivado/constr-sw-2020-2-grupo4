@@ -5,7 +5,7 @@ var ClassController = require('../controller/ClassController.js');
 module.exports = [
     {
         method: "GET",
-        path: "/index",
+        path: "/",
         options: {
             auth: "simple",
             description: "Index endpoint to test if application is up and running",
@@ -26,7 +26,7 @@ module.exports = [
     },
     {
         method: "GET",
-        path: "/class/{id}",
+        path: "/classes/{id}",
         options: {
             auth: "simple",
             description: "Returns a class with given ID",
@@ -57,7 +57,7 @@ module.exports = [
     },
     {
         method: "DELETE",
-        path: "/class/{id}",
+        path: "/classes/{id}",
         options: {
             auth: "simple",
             description: "Deletes a class with given ID",
@@ -88,7 +88,7 @@ module.exports = [
     },
     {
         method: "DELETE",
-        path: "/class",
+        path: "/classes",
         options: {
             auth: "simple",
             description: "Deletes all classes",
@@ -111,7 +111,7 @@ module.exports = [
     },
     {
         method: "PUT",
-        path: "/class/{id}",
+        path: "/classes/{id}",
         options: {
             auth: "simple",
             description: "Updates class info with given ID",
@@ -149,7 +149,7 @@ module.exports = [
     },
     {
         method: "GET",
-        path: "/class",
+        path: "/classes",
         options: {
             auth: "simple",
             description: "Returns all classes",
@@ -172,7 +172,7 @@ module.exports = [
     },
     {
         method: "POST",
-        path: "/class",
+        path: "/classes",
         options: {
             auth: "simple",
             description: "Register new class",
@@ -208,7 +208,7 @@ module.exports = [
     },
     {
         method: "GET",
-        path: "/class/{id}/content",
+        path: "/classes/{id}/content",
         options: {
             auth: "simple",
             description: "Returns all contents from a class",
@@ -232,7 +232,7 @@ module.exports = [
     },
     {
         method: "GET",
-        path: "/class/{id}/evaluations",
+        path: "/classes/{id}/evaluations",
         options: {
             auth: "simple",
             description: "Returns all evaluations from a class",
@@ -256,7 +256,7 @@ module.exports = [
     },
     {
         method: "GET",
-        path: "/class/{id}/rooms",
+        path: "/classes/{id}/rooms",
         options: {
             auth: "simple",
             description: "Returns all rooms from a class",
@@ -280,7 +280,7 @@ module.exports = [
     },
     {
         method: "GET",
-        path: "/class/{id}/teams",
+        path: "/classes/{id}/teams",
         options: {
             auth: "simple",
             description: "Returns all teams from a class",
