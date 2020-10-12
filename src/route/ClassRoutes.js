@@ -184,7 +184,8 @@ module.exports = [
                     content: joi.string().required(),
                     room: joi.string().optional(),
                     team: joi.string().optional(),
-                    evaluation: joi.string().optional()
+                    evaluation: joi.string().optional(),
+                    date: joi.date().required()
                 }),
                 failAction: (request, resp, error) => {
                     return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
