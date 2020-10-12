@@ -1,7 +1,3 @@
-
-
-const { async } = require('q');
-//mongoose
 var ClassModel = require('../model/ClassModel');
 
 const insertService = async (data) => {
