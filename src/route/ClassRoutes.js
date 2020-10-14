@@ -148,6 +148,44 @@ module.exports = [
         }
     },
     {
+        method: "PATCH",
+        path: "/classes/{id}",
+        options: {
+            auth: "simple",
+            description: "Updates class info with given ID",
+            notes: "Updates class info with given ID",
+            tags: ["api", "Class"],
+            validate: {
+                params: joi.object({ 
+                    id: joi.string().required()
+                }),
+                payload: joi.object({
+                    description: joi.string().optional(),
+                    content: joi.string().optional(),
+                    room: joi.string().optional(),
+                    team: joi.string().optional(),
+                    evaluation: joi.string().optional()
+                }),
+                failAction: (request, resp, error) => {
+                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
+                }
+            },
+            handler: async (request, res) => {
+                try {
+                    let classModel = await ClassController.updateClassWithIdController(request.params.id, request.payload);
+                    let data = {
+                        status: "success",
+                        message: "Class updated successfully",
+                        data: classModel
+                    }
+                    return res.response(data);
+                } catch (error) {
+                    return resp.response(error).code(500);
+                }
+            }
+        }
+    },
+    {
         method: "GET",
         path: "/classes",
         options: {
