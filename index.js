@@ -74,7 +74,7 @@ const swaggerOptions = {
 			description: "API health check"
 		},
 		{
-			name: "Evaluation",
+			name: "Evaluations",
 			description: "Class evaluation"
 		},
 		{

@@ -249,6 +249,14 @@ module.exports = [
         method: "GET",
         path: "/classes/{id}/content",
         options: {
+            validate: {
+                params: joi.object({ 
+                    id: joi.string().required()
+                }),
+                failAction: (request, resp, error) => {
+                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
+                }
+            },
             auth: "simple",
             description: "Returns all contents from a class",
             notes: "Returns all contents for a class",
@@ -273,6 +281,14 @@ module.exports = [
         method: "GET",
         path: "/classes/{id}/evaluations",
         options: {
+            validate: {
+                params: joi.object({ 
+                    id: joi.string().required()
+                }),
+                failAction: (request, resp, error) => {
+                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
+                }
+            },
             auth: "simple",
             description: "Returns all evaluations from a class",
             notes: "Returns all evaluations for a class",
@@ -297,6 +313,14 @@ module.exports = [
         method: "GET",
         path: "/classes/{id}/rooms",
         options: {
+            validate: {
+                params: joi.object({ 
+                    id: joi.string().required()
+                }),
+                failAction: (request, resp, error) => {
+                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
+                }
+            },
             auth: "simple",
             description: "Returns all rooms from a class",
             notes: "Returns all rooms for a class",
@@ -321,6 +345,14 @@ module.exports = [
         method: "GET",
         path: "/classes/{id}/teams",
         options: {
+            validate: {
+                params: joi.object({ 
+                    id: joi.string().required()
+                }),
+                failAction: (request, resp, error) => {
+                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
+                }
+            },
             auth: "simple",
             description: "Returns all teams from a class",
             notes: "Returns all teams for a class",
