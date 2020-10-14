@@ -72,6 +72,22 @@ const swaggerOptions = {
 		{
 			name: "Health",
 			description: "API health check"
+		},
+		{
+			name: "Evaluation",
+			description: "Class evaluation"
+		},
+		{
+			name: "Contents",
+			description: "Class contents"
+		},
+		{
+			name: "Rooms",
+			description: "Class rooms"
+		},
+		{
+			name: "Teams",
+			description: "Class teams"
 		}
 	]
 };
