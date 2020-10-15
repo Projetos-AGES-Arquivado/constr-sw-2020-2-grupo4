@@ -3,6 +3,8 @@ const joi = require('joi');
 const ClassController = require('../controller/ClassController.js');
 const HealthController = require('../controller/HealthController.js');
 const FailureHandlerController = require('../controller/FailureHandlerController.js');
+const ClassValidator = require('../validator/ClassValidator.js');
+
 module.exports = [
     {
         method: "GET",
@@ -24,9 +26,7 @@ module.exports = [
             notes: "Returns class information with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
+                params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.getClassWithIdController
@@ -41,9 +41,7 @@ module.exports = [
             notes: "Deletes a class information with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
+                params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.deleteClassWithIdController
@@ -69,9 +67,7 @@ module.exports = [
             notes: "Updates class info with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
+                params: ClassValidator.idParameterValidator,
                 payload: joi.object({
                     description: joi.string().optional(),
                     content: joi.string().optional(),
@@ -93,9 +89,7 @@ module.exports = [
             notes: "Updates class info with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
+                params: ClassValidator.idParameterValidator,
                 payload: joi.object({
                     description: joi.string().optional(),
                     content: joi.string().optional(),
@@ -146,9 +140,7 @@ module.exports = [
         path: "/classes/{id}/content",
         options: {
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
+                params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
@@ -163,9 +155,7 @@ module.exports = [
         path: "/classes/{id}/evaluations",
         options: {
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
+                params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
@@ -180,9 +170,7 @@ module.exports = [
         path: "/classes/{id}/rooms",
         options: {
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
+                params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
@@ -197,9 +185,7 @@ module.exports = [
         path: "/classes/{id}/teams",
         options: {
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
+                params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
