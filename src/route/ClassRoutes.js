@@ -2,7 +2,7 @@
 const joi = require('joi');
 const ClassController = require('../controller/ClassController.js');
 const HealthController = require('../controller/HealthController.js');
-
+const FailureHandlerController = require('../controller/FailureHandlerController.js');
 module.exports = [
     {
         method: "GET",
@@ -27,9 +27,7 @@ module.exports = [
                 params: joi.object({
                     id: joi.string().required()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.getClassWithIdController
         }
@@ -46,9 +44,7 @@ module.exports = [
                 params: joi.object({
                     id: joi.string().required()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.deleteClassWithIdController
         }
@@ -83,9 +79,7 @@ module.exports = [
                     team: joi.string().optional(),
                     evaluation: joi.string().optional()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.updateClassWithIdController
         }
@@ -109,9 +103,7 @@ module.exports = [
                     team: joi.string().optional(),
                     evaluation: joi.string().optional()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.updateClassWithIdController
         }
@@ -144,9 +136,7 @@ module.exports = [
                     evaluation: joi.string().optional(),
                     date: joi.date().required()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.insertController
         }
@@ -159,9 +149,7 @@ module.exports = [
                 params: joi.object({
                     id: joi.string().required()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
             description: "Returns all contents from a class",
@@ -178,9 +166,7 @@ module.exports = [
                 params: joi.object({
                     id: joi.string().required()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
             description: "Returns all evaluations from a class",
@@ -197,9 +183,7 @@ module.exports = [
                 params: joi.object({
                     id: joi.string().required()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
             description: "Returns all rooms from a class",
@@ -216,9 +200,7 @@ module.exports = [
                 params: joi.object({
                     id: joi.string().required()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
             description: "Returns all teams from a class",

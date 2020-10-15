@@ -57,7 +57,7 @@ const deleteAllClassesService = async (id) => {
 const updateClassWithIdService = async (id, payload) => {
     //update class
     try {
-        result = await ClassModel.findByIdAndUpdate(id, payload, {new : true});
+        result = await ClassModel.findOneAndUpdate(id, payload, {new : true});
     } catch (error) {
         console.log('error ', error);
     }
