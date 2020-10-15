@@ -2,10 +2,13 @@
 const joi = require('joi');
 const ClassController = require('../controller/ClassController.js');
 const HealthController = require('../controller/HealthController.js');
+const FailureHandlerController = require('../controller/FailureHandlerController.js');
+const ClassValidator = require('../validator/ClassValidator.js');
+const HTTPMethod = require('../config/HTTPMethod.js')
 
 module.exports = [
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/",
         options: {
             auth: "simple",
@@ -16,7 +19,7 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}",
         options: {
             auth: "simple",
@@ -24,18 +27,14 @@ module.exports = [
             notes: "Returns class information with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                params: ClassValidator.idParameterValidator,
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.getClassWithIdController
         }
     },
     {
-        method: "DELETE",
+        method: HTTPMethod.DELETE,
         path: "/classes/{id}",
         options: {
             auth: "simple",
@@ -43,18 +42,14 @@ module.exports = [
             notes: "Deletes a class information with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                params: ClassValidator.idParameterValidator,
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.deleteClassWithIdController
         }
     },
     {
-        method: "DELETE",
+        method: HTTPMethod.DELETE,
         path: "/classes",
         options: {
             auth: "simple",
@@ -65,7 +60,7 @@ module.exports = [
         }
     },
     {
-        method: "PUT",
+        method: HTTPMethod.PUT,
         path: "/classes/{id}",
         options: {
             auth: "simple",
@@ -73,25 +68,15 @@ module.exports = [
             notes: "Updates class info with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
-                payload: joi.object({
-                    description: joi.string().optional(),
-                    content: joi.string().optional(),
-                    room: joi.string().optional(),
-                    team: joi.string().optional(),
-                    evaluation: joi.string().optional()
-                }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                params: ClassValidator.idParameterValidator,
+                payload: ClassValidator.classUpdateScheme,
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.updateClassWithIdController
         }
     },
     {
-        method: "PATCH",
+        method: HTTPMethod.PATCH,
         path: "/classes/{id}",
         options: {
             auth: "simple",
@@ -99,9 +84,7 @@ module.exports = [
             notes: "Updates class info with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
+                params: ClassValidator.idParameterValidator,
                 payload: joi.object({
                     description: joi.string().optional(),
                     content: joi.string().optional(),
@@ -109,15 +92,13 @@ module.exports = [
                     team: joi.string().optional(),
                     evaluation: joi.string().optional()
                 }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.updateClassWithIdController
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes",
         options: {
             auth: "simple",
@@ -128,7 +109,7 @@ module.exports = [
         }
     },
     {
-        method: "POST",
+        method: HTTPMethod.POST,
         path: "/classes",
         options: {
             auth: "simple",
@@ -136,32 +117,19 @@ module.exports = [
             notes: "Register a class",
             tags: ["api", "Class"],
             validate: {
-                payload: joi.object({
-                    description: joi.string().required(),
-                    content: joi.string().required(),
-                    room: joi.string().optional(),
-                    team: joi.string().optional(),
-                    evaluation: joi.string().optional(),
-                    date: joi.date().required()
-                }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                payload: ClassValidator.insertClassScheme,
+                failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.insertController
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}/content",
         options: {
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                params: ClassValidator.idParameterValidator,
+                failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
             description: "Returns all contents from a class",
@@ -171,16 +139,12 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}/evaluations",
         options: {
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                params: ClassValidator.idParameterValidator,
+                failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
             description: "Returns all evaluations from a class",
@@ -190,16 +154,12 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}/rooms",
         options: {
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                params: ClassValidator.idParameterValidator,
+                failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
             description: "Returns all rooms from a class",
@@ -209,16 +169,12 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}/teams",
         options: {
             validate: {
-                params: joi.object({
-                    id: joi.string().required()
-                }),
-                failAction: (request, resp, error) => {
-                    return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
-                }
+                params: ClassValidator.idParameterValidator,
+                failAction: FailureHandlerController.failureHandler
             },
             auth: "simple",
             description: "Returns all teams from a class",
