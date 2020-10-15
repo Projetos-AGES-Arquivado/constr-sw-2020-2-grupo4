@@ -12,3 +12,12 @@ exports.classUpdateScheme = joi.object({
     team: joi.string().optional(),
     evaluation: joi.string().optional()
 })
+
+exports.insertClassScheme = joi.object({
+    description: joi.string().required(),
+    content: joi.string().required(),
+    room: joi.string().optional(),
+    team: joi.string().optional(),
+    evaluation: joi.string().optional(),
+    date: joi.date().required()
+})

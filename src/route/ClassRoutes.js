@@ -116,14 +116,7 @@ module.exports = [
             notes: "Register a class",
             tags: ["api", "Class"],
             validate: {
-                payload: joi.object({
-                    description: joi.string().required(),
-                    content: joi.string().required(),
-                    room: joi.string().optional(),
-                    team: joi.string().optional(),
-                    evaluation: joi.string().optional(),
-                    date: joi.date().required()
-                }),
+                payload: ClassValidator.insertClassScheme,
                 failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.insertController
