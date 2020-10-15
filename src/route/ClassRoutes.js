@@ -4,10 +4,11 @@ const ClassController = require('../controller/ClassController.js');
 const HealthController = require('../controller/HealthController.js');
 const FailureHandlerController = require('../controller/FailureHandlerController.js');
 const ClassValidator = require('../validator/ClassValidator.js');
+const HTTPMethod = require('../config/HTTPMethod.js')
 
 module.exports = [
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/",
         options: {
             auth: "simple",
@@ -18,7 +19,7 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}",
         options: {
             auth: "simple",
@@ -33,7 +34,7 @@ module.exports = [
         }
     },
     {
-        method: "DELETE",
+        method: HTTPMethod.DELETE,
         path: "/classes/{id}",
         options: {
             auth: "simple",
@@ -48,7 +49,7 @@ module.exports = [
         }
     },
     {
-        method: "DELETE",
+        method: HTTPMethod.DELETE,
         path: "/classes",
         options: {
             auth: "simple",
@@ -59,7 +60,7 @@ module.exports = [
         }
     },
     {
-        method: "PUT",
+        method: HTTPMethod.PUT,
         path: "/classes/{id}",
         options: {
             auth: "simple",
@@ -75,7 +76,7 @@ module.exports = [
         }
     },
     {
-        method: "PATCH",
+        method: HTTPMethod.PATCH,
         path: "/classes/{id}",
         options: {
             auth: "simple",
@@ -97,7 +98,7 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes",
         options: {
             auth: "simple",
@@ -108,7 +109,7 @@ module.exports = [
         }
     },
     {
-        method: "POST",
+        method: HTTPMethod.POST,
         path: "/classes",
         options: {
             auth: "simple",
@@ -123,7 +124,7 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}/content",
         options: {
             validate: {
@@ -138,7 +139,7 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}/evaluations",
         options: {
             validate: {
@@ -153,7 +154,7 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}/rooms",
         options: {
             validate: {
@@ -168,7 +169,7 @@ module.exports = [
         }
     },
     {
-        method: "GET",
+        method: HTTPMethod.GET,
         path: "/classes/{id}/teams",
         options: {
             validate: {
