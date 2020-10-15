@@ -1,6 +1,7 @@
 "use strict"
 const joi = require('joi');
-var ClassController = require('../controller/ClassController.js');
+const ClassController = require('../controller/ClassController.js');
+const HealthController = require('../controller/HealthController.js');
 
 module.exports = [
     {
@@ -11,17 +12,7 @@ module.exports = [
             description: "Index endpoint to test if application is up and running",
             notes: "Returns a hello world",
             tags: ["api", "Health"],
-            handler: async (request, resp) => {
-                try {
-                    var data = {
-                        success: "true",
-                        message: "Hello world"
-                    }
-                    return resp.response(data);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: HealthController.getHealthController
         }
     },
     {
@@ -33,26 +24,14 @@ module.exports = [
             notes: "Returns class information with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({ 
+                params: joi.object({
                     id: joi.string().required()
                 }),
                 failAction: (request, resp, error) => {
                     return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
                 }
             },
-            handler: async (request, resp) => {
-                try {
-                    let classModel = await ClassController.getClassWithIdController(request.params.id);
-                    var response = {
-                        success: "true",
-                        message: "Class retrieved successfully",
-                        data: classModel
-                    }
-                    return resp.response(response);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.getClassWithIdController
         }
     },
     {
@@ -64,26 +43,14 @@ module.exports = [
             notes: "Deletes a class information with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({ 
+                params: joi.object({
                     id: joi.string().required()
                 }),
                 failAction: (request, resp, error) => {
                     return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
                 }
             },
-            handler: async (request, res) => {
-                try {
-                    let classModel = await ClassController.deleteClassWithIdController(request.params.id);
-                    let data = {
-                        status: "success",
-                        message: "Class deleted successfully",
-                        data: classModel
-                    }
-                    return res.response(data);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.deleteClassWithIdController
         }
     },
     {
@@ -94,19 +61,7 @@ module.exports = [
             description: "Deletes all classes",
             notes: "Deletes all classes from database",
             tags: ["api", "Class"],
-            handler: async (request, res) => {
-                try {
-                    let classModel = await ClassController.deleteAllClassesController();
-                    let data = {
-                        status: "success",
-                        message: "All classes were deleted",
-                        data: classModel
-                    }
-                    return res.response(data);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.deleteAllClassesController
         }
     },
     {
@@ -118,7 +73,7 @@ module.exports = [
             notes: "Updates class info with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({ 
+                params: joi.object({
                     id: joi.string().required()
                 }),
                 payload: joi.object({
@@ -132,19 +87,7 @@ module.exports = [
                     return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
                 }
             },
-            handler: async (request, res) => {
-                try {
-                    let classModel = await ClassController.updateClassWithIdController(request.params.id, request.payload);
-                    let data = {
-                        status: "success",
-                        message: "Class updated successfully",
-                        data: classModel
-                    }
-                    return res.response(data);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.updateClassWithIdController
         }
     },
     {
@@ -156,7 +99,7 @@ module.exports = [
             notes: "Updates class info with given ID",
             tags: ["api", "Class"],
             validate: {
-                params: joi.object({ 
+                params: joi.object({
                     id: joi.string().required()
                 }),
                 payload: joi.object({
@@ -170,19 +113,7 @@ module.exports = [
                     return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
                 }
             },
-            handler: async (request, res) => {
-                try {
-                    let classModel = await ClassController.updateClassWithIdController(request.params.id, request.payload);
-                    let data = {
-                        status: "success",
-                        message: "Class updated successfully",
-                        data: classModel
-                    }
-                    return res.response(data);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.updateClassWithIdController
         }
     },
     {
@@ -193,19 +124,7 @@ module.exports = [
             description: "Returns all classes",
             notes: "Returns all registered classes",
             tags: ["api", "Class"],
-            handler: async (request, resp) => {
-                try {
-                    let classes = await ClassController.getAllClassesController();
-                    var response = {
-                        success: "true",
-                        message: "All classes retrieved successfully",
-                        data: classes
-                    }
-                    return resp.response(response);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.getAllClassesController
         }
     },
     {
@@ -229,20 +148,7 @@ module.exports = [
                     return error.isJoi ? resp.response(error.details[0]).takeover() : resp.response(error).takeover();
                 }
             },
-            handler: async (request, resp) => {
-                try {
-                    console.log('request ', request.payload)
-                    let response = await ClassController.insertController(request.payload);
-                    var data = {
-                        success: "true",
-                        message: "Class created successfully",
-                        data: response
-                    }
-                    return resp.response(data);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.insertController
         }
     },
     {
@@ -250,7 +156,7 @@ module.exports = [
         path: "/classes/{id}/content",
         options: {
             validate: {
-                params: joi.object({ 
+                params: joi.object({
                     id: joi.string().required()
                 }),
                 failAction: (request, resp, error) => {
@@ -261,20 +167,7 @@ module.exports = [
             description: "Returns all contents from a class",
             notes: "Returns all contents for a class",
             tags: ["api", "Class", "Contents"],
-            handler: async (request, resp) => {
-                try {
-                    const id = request.params.id;
-                    const contents = await ClassController.getContentsByClassId(id);
-                    var response = {
-                        success: "true",
-                        message: `All contents from class ${id} retrieved successfully`,
-                        data: contents
-                    }
-                    return resp.response(response);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.getContentsByClassId
         }
     },
     {
@@ -282,7 +175,7 @@ module.exports = [
         path: "/classes/{id}/evaluations",
         options: {
             validate: {
-                params: joi.object({ 
+                params: joi.object({
                     id: joi.string().required()
                 }),
                 failAction: (request, resp, error) => {
@@ -293,20 +186,7 @@ module.exports = [
             description: "Returns all evaluations from a class",
             notes: "Returns all evaluations for a class",
             tags: ["api", "Class", "Evaluations"],
-            handler: async (request, resp) => {
-                try {
-                    const id = request.params.id;
-                    const contents = await ClassController.getEvaluationsByClassId(id);
-                    var response = {
-                        success: "true",
-                        message: `All evaluations from class ${id} retrieved successfully`,
-                        data: contents
-                    }
-                    return resp.response(response);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.getEvaluationsByClassId
         }
     },
     {
@@ -314,7 +194,7 @@ module.exports = [
         path: "/classes/{id}/rooms",
         options: {
             validate: {
-                params: joi.object({ 
+                params: joi.object({
                     id: joi.string().required()
                 }),
                 failAction: (request, resp, error) => {
@@ -325,20 +205,7 @@ module.exports = [
             description: "Returns all rooms from a class",
             notes: "Returns all rooms for a class",
             tags: ["api", "Class", "Rooms"],
-            handler: async (request, resp) => {
-                try {
-                    const id = request.params.id;
-                    const contents = await ClassController.getRoomsByClassId(id);
-                    var response = {
-                        success: "true",
-                        message: `All rooms from class ${id} retrieved successfully`,
-                        data: contents
-                    }
-                    return resp.response(response);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.getRoomsByClassId
         }
     },
     {
@@ -346,7 +213,7 @@ module.exports = [
         path: "/classes/{id}/teams",
         options: {
             validate: {
-                params: joi.object({ 
+                params: joi.object({
                     id: joi.string().required()
                 }),
                 failAction: (request, resp, error) => {
@@ -357,20 +224,7 @@ module.exports = [
             description: "Returns all teams from a class",
             notes: "Returns all teams for a class",
             tags: ["api", "Class", "Teams"],
-            handler: async (request, resp) => {
-                try {
-                    const id = request.params.id;
-                    const contents = await ClassController.getTeamsByClassId(id);
-                    var response = {
-                        success: "true",
-                        message: `All teams from class ${id} retrieved successfully`,
-                        data: contents
-                    }
-                    return resp.response(response);
-                } catch (error) {
-                    return resp.response(error).code(500);
-                }
-            }
+            handler: ClassController.getTeamsByClassId
         }
     },
 
