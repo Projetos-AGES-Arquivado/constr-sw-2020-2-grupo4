@@ -68,13 +68,7 @@ module.exports = [
             tags: ["api", "Class"],
             validate: {
                 params: ClassValidator.idParameterValidator,
-                payload: joi.object({
-                    description: joi.string().optional(),
-                    content: joi.string().optional(),
-                    room: joi.string().optional(),
-                    team: joi.string().optional(),
-                    evaluation: joi.string().optional()
-                }),
+                payload: ClassValidator.classUpdateScheme,
                 failAction: FailureHandlerController.failureHandler
             },
             handler: ClassController.updateClassWithIdController
