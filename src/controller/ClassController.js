@@ -8,6 +8,8 @@ var ClassServiceFake = require('../service/ClassServiceFake.js');
 
 exports.getClassWithIdController = async function (request, resp) {
     try {
+        const params = request.query;
+        console.log(params);
         let classModel = await ClassService.getClassWithIdService(request.params.id);
         var response = {
             success: "true",
@@ -36,6 +38,8 @@ exports.insertController = async function (request, resp) {
 
 exports.getTeamsByClassId = async function (request, resp) {
     try {
+        const params = request.query;
+        console.log(params);
         let id = request.params.id
         let contents = await ClassServiceFake.getTeamsByClassId(request.params.id);
         var response = {
@@ -96,6 +100,8 @@ exports.getContentsByClassId = async function (request, resp) {
 
 exports.getAllClassesController = async function (request, resp) {
     try {
+        const params = request.query;
+        console.log(params);
         let classes = await ClassService.getAllClassesService();
         var response = {
             success: "true",
