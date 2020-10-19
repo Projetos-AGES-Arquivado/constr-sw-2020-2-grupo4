@@ -109,7 +109,7 @@ exports.getContentsByClassId = async function (request, resp) {
 
 exports.getAllClassesController = async function (request, resp) {
     try {
-        let classes = await ClassService.getAllClassesService();
+        let classes = await ClassService.getAllClassesService(request.query);
         var response = {
             success: true,
             message: "All classes retrieved successfully",
@@ -123,7 +123,7 @@ exports.getAllClassesController = async function (request, resp) {
 
 exports.deleteAllClassesController = async function (request, resp) {
     try {
-        let classModel = await ClassService.deleteAllClassesService();
+        let classModel = await ClassService.deleteAllClassesService(request.query);
         let data = {
             success: true,
             message: "All classes were deleted",

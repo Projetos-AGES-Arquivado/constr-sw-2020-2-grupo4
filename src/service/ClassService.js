@@ -24,10 +24,10 @@ const getClassWithIdService = async (id) => {
     return result
 }
 
-const getAllClassesService = async () => {
+const getAllClassesService = async (queryParams) => {
     //get all classes
     try {
-        result = await ClassModel.find();
+        result = await ClassModel.find(queryParams);
     } catch (error) {
         console.log('error ', error);
     }
@@ -44,10 +44,10 @@ const deleteClassWithIdService = async (id) => {
     return result
 }
 
-const deleteAllClassesService = async (id) => {
+const deleteAllClassesService = async (queryParams) => {
     //delete all class
     try {
-        result = await ClassModel.deleteMany();
+        result = await ClassModel.deleteMany(queryParams);
     } catch (error) {
         console.log('error ', error);
     }
