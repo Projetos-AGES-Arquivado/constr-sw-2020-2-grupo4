@@ -1,0 +1,295 @@
+swagger: "2.0"
+info:
+  description: "Essa documentação tem como objetivo apresentar os contratos do microserviço da entidade \"Aulas\" como parte da avaliação da disciplina de Construção de Software.\nIntegrantes: Bruno Guerra, Gabriel Silva, Gulherme Deconto e João Nascimento"
+  version: "1.0.0"
+  title: "Swagger Aulas - Microserviços PUCRS"
+  contact:
+    email: "eduardo.arruda@pucrs.br"
+host: "petstore.swagger.io"
+basePath: "/v1"
+tags:
+- name: "classes"
+  description: "Retorna as aulas (classes) de todas as turmas de disciplinas correntes."
+  externalDocs:
+    description: "Find out more"
+    url: "http://swagger.io"
+schemes:
+- "http"
+paths:
+  /classes:
+    post:
+      tags:
+      - "classes"
+      summary: "Register new class"
+      description: "Register a new class"
+      operationId: "addAula"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto aula que precisa ser enviado para adicionar uma nova aula"
+        required: true
+        schema:
+          $ref: "#/definitions/Classes"
+      responses:
+        "405":
+          description: "Invalid input"
+    get:
+      tags:
+      - "classes"
+      summary: "Get all classes"
+      description: "Get all classes"
+      operationId: "getAllClasses"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Objeto de atualização de uma turma"
+        required: true
+        schema:
+          $ref: "#/definitions/Classes"
+      responses:
+        "200":
+          description: "All classes retrieved successfully"
+        "500":
+          description: "External error exception"
+    delete:
+      tags:
+      - "classes"
+      summary: "Deletes all classes"
+      description: "Deletes all classes"
+      operationId: "deleteAllClasses"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "All classes deleted"
+        "500":
+          description: "External error exception"
+          
+  /classes/{id}:
+    get:
+        tags:
+        - "classes"
+        summary: "Get a class by a given id"
+        description: "Get a class by a given ID"
+        operationId: "getClassByid"
+        consumes:
+        - "application/json"
+        produces:
+        - "application/json"
+        parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          description: "Id of a given class"
+          type: string
+        responses:
+          "200":
+            description: "All classes retrieved successfully"
+          "500":
+            description: "External error exception"
+    delete:
+        tags:
+        - "classes"
+        summary: "Get a class by a given id"
+        description: "Delete a class by a given ID"
+        operationId: "deleteClassById"
+        consumes:
+        - "application/json"
+        produces:
+        - "application/json"
+        parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          description: "Id of a given class"
+          type: string
+        responses:
+          "200":
+            description: "All classes retrieved successfully"
+          "500":
+            description: "External error exception"
+    patch:
+      tags:
+      - "classes"
+      summary: "Update a class partially"
+      description: "Update a class partially"
+      operationId: "modifyPartiallyClass"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          description: "Id of a given class"
+          type: string
+      responses:
+        "200":
+          description: "Class modified successfully"
+        "500":
+          description: "External error exception"
+    put:
+      tags:
+      - "classes"
+      summary: "Updates a class completely"
+      description: "Updates a class completely"
+      operationId: "updateAula"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          required: true
+          description: "Id of a given class"
+          type: string
+      responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Class not found"
+        "405":
+          description: "Validation exception"
+      
+  /classes/{id}/teams:
+    get:
+      tags:
+      - "classes"
+      summary: "Returns all teams from a class"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findAulasByTurma"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of a given class"
+        required: true
+        type: string
+      responses:
+        "200":
+          description: "successful operation"
+          
+        "400":
+          description: "Invalid status value"
+                
+  /classes/{id}/evaluations:
+    get:
+      tags:
+      - "classes"
+      summary: "Returns all teams from a class"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findEvaluationsyClass"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of a given class"
+        required: true
+        type: string
+      responses:
+        "200":
+          description: "successful operation"
+          
+        "400":
+          description: "Invalid status value"
+          
+  /classes/{id}/contents:
+    get:
+      tags:
+      - "classes"
+      summary: "Returns all teams from a class"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findContentsByClass"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of a given class"
+        required: true
+        type: string
+      responses:
+        "200":
+          description: "successful operation"
+          
+        "400":
+          description: "Invalid status value"
+          
+  /classes/{id}/rooms:
+    get:
+      tags:
+      - "classes"
+      summary: "Returns all rooms from a class"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findRoomsByClass"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "Id of a given class"
+        required: true
+        type: string
+      responses:
+        "200":
+          description: "successful operation"
+          
+        "400":
+          description: "Invalid status value"
+  
+definitions:
+  Classes:
+    type: "object"
+    required:
+    - "name"
+    - "photoUrls"
+    properties:
+      _id:
+        type: "integer"
+        format: "int64"
+        example: "5f84df180621aa0011357657"
+      description:
+        type: "string"
+        example: "Aula para alguma finalidade"
+      content:
+        type: "string"
+        example: "5f877fae0621aa0011357658"
+      room:
+        type: "string"
+        example: "5f877fae0621aa0011357658"
+      team:
+        type: "string"
+        example: "5f877fae0621aa0011357658"
+      evaluation:
+        type: "string"
+        example: "5f84df180621aa0011357657"
+      date:
+        type: "string"
+        example: "2020-10-12T00:00:00.000Z"
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+        format: "int32"
+      type:
+        type: "string"
+      message:
+        type: "string"
+externalDocs:
+  description: "Find out more about Swagger"
+  url: "http://swagger.io"
