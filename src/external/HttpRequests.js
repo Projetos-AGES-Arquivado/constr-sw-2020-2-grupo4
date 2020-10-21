@@ -5,7 +5,7 @@ exports.sendRequest = function(requestBody, options, callback) {
     //Defines a const that caries the url of the request
     const url = ` ${options.hostname}${options.path}`;
     //Creates the request
-    const req = https.request(options, res => {
+    const req = http.request(options, res => {
         //Declares a variable that will hold the body
         let body = '';
         //Set a listener for data received
