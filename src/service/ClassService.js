@@ -65,7 +65,7 @@ const updateClassWithIdService = async (id, payload) => {
     return result
 }
 
-const getContentsByClassId = async (id) => {
+const getTeamsByClassId = async (id) => {
 
     console.log('get contents by class id');
 
