@@ -1,4 +1,5 @@
 var ClassModel = require('../model/ClassModel');
+var HttpRequests = require('../external/HttpRequests');
 
 const insertService = async (data) => {
     //insert into
@@ -64,9 +65,33 @@ const updateClassWithIdService = async (id, payload) => {
     return result
 }
 
+const getContentsByClassId = async (id) => {
+
+    console.log('get contents by class id');
+
+    const requestBody = '';
+
+    const options = {
+        hostname: 'http://ec2-34-238-114-89.compute-1.amazonaws.com:3000/turma',
+        path: '/',
+        method: 'GET'
+      };
+
+    HttpRequests.sendRequest(requestBody, options, (data) => {
+        console.log('data ', data);
+    });
+
+    console.log('get contents by class id after');
+
+    //insert into
+    //const contents = await ContentFaker.getAllContentsByClassId(id);
+    return 'contents';
+}
+
 exports.insertService = insertService;
 exports.getClassWithIdService = getClassWithIdService;
 exports.getAllClassesService = getAllClassesService;
 exports.deleteClassWithIdService = deleteClassWithIdService;
 exports.updateClassWithIdService = updateClassWithIdService;
 exports.deleteAllClassesService = deleteAllClassesService;
+exports.getContentsByClassId = getContentsByClassId;
