@@ -101,7 +101,7 @@ exports.getEvaluationsByClassId = async function (request, resp) {
 exports.getContentsByClassId = async function (request, resp) {
     try {
         const id = request.params.id;
-        const contents = await ClassServiceFake.getContentsByClassId(request.params.id);
+        const contents = await ClassService.getContentsByClassId(request.params.id);
         var response = {
             success: true,
             message: `All contents from class ${id} retrieved successfully`,

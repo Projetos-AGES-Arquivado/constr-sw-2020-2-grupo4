@@ -94,6 +94,26 @@ const getTeamsByClassId = async (id) => {
     return 'contents';
 }
 
+const getContentsByClassId = async (id) => {
+    HttpRequests.sendRequest(
+        null,
+        {
+            host: '3.21.130.129',
+            path: '/content',
+            port: '5000',
+            method: 'GET'
+        },
+        (response, error) => {
+            if (error) {
+                console.log(error)
+            } else {
+                console.log(response)
+            }
+        }
+    );
+    return 'contents';
+}
+
 exports.insertService = insertService;
 exports.getClassWithIdService = getClassWithIdService;
 exports.getAllClassesService = getAllClassesService;
@@ -101,3 +121,4 @@ exports.deleteClassWithIdService = deleteClassWithIdService;
 exports.updateClassWithIdService = updateClassWithIdService;
 exports.deleteAllClassesService = deleteAllClassesService;
 exports.getTeamsByClassId = getTeamsByClassId;
+exports.getContentsByClassId = getContentsByClassId;
