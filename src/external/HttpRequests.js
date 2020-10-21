@@ -1,4 +1,4 @@
-const https = require('http');
+const http = require('http');
 const Chalk = require('chalk');
 
 exports.sendRequest = function(requestBody, options, callback) {
