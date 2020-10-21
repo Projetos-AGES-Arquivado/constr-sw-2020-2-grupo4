@@ -69,17 +69,23 @@ const getContentsByClassId = async (id) => {
 
     console.log('get contents by class id');
 
-    const requestBody = '';
-
-    const options = {
-        hostname: 'http://ec2-34-238-114-89.compute-1.amazonaws.com:3000/turma',
-        path: '/',
-        method: 'GET'
-      };
-
-    HttpRequests.sendRequest(requestBody, options, (data) => {
-        console.log('data ', data);
-    });
+    HttpRequests.sendRequest(
+        null,
+        {
+            host: 'ec2-34-238-114-89.compute-1.amazonaws.com',
+            path: '/turma',
+            port: '3000',
+            method: 'GET'
+        },
+        (response, error) => {
+            if (error) {
+                //reject(error);
+            } else {
+                console.log(response)
+                //resolve(response.toString('utf-8'));
+            }
+        }
+    );
 
     console.log('get contents by class id after');
 

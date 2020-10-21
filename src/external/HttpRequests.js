@@ -1,11 +1,8 @@
-const https = require('https');
+const https = require('http');
 const Chalk = require('chalk');
 
 exports.sendRequest = function(requestBody, options, callback) {
     //Defines a const that caries the url of the request
-
-    console.log('aaa ');
-    console.log('options: ', options);
     const url = ` ${options.hostname}${options.path}`;
     //Creates the request
     const req = https.request(options, res => {
@@ -14,9 +11,6 @@ exports.sendRequest = function(requestBody, options, callback) {
         //Set a listener for data received
         res.on('data', chunk => {
             //Save the chuck into the data variable
-
-            console.log('chunk ', chunk);
-
             body += chunk;
         });
 
@@ -25,24 +19,17 @@ exports.sendRequest = function(requestBody, options, callback) {
             //Log the status code and url
             console.log(Chalk.green(`${Chalk.blue(res.statusCode)} <- ${url}`));
 
-
-            console.log('res on end: ', res);
-
             //Check if the request was not successful
             if (res.statusCode > 400) {
                 //Return the body as a error
                 callback(null, body);
             } else {
                 //Return the body
-
-                console.log('return the body', body);
                 callback(body, null);
             }
         });
     }).on('error', error => {
         //Log the error
-
-        console.log('Error...');
         console.log(Chalk.red(`${Chalk.white(error)} <- ${url}`));
         //Return the error
         callback(null, error);
