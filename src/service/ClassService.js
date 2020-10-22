@@ -69,7 +69,7 @@ const getTeamsByClassId = async (id) => {
 
     console.log('get contents by class id');
 
-    HttpRequests.sendRequest(
+    return HttpRequests.sendRequest(
         null,
         {
             host: 'ec2-34-238-114-89.compute-1.amazonaws.com',
@@ -79,19 +79,24 @@ const getTeamsByClassId = async (id) => {
         },
         (response, error) => {
             if (error) {
+                console.log(error)
                 //reject(error);
             } else {
-                console.log(response)
+
+                response = JSON.parse(response)
+                let teamsList = []
+                for (let i = 0; i < response.length; i++) {
+                    if (response[i].aulas.includes(id)) {
+                        teamsList.push(response[i])
+                    }
+                }
+
+                //console.log(teamsList)
                 //resolve(response.toString('utf-8'));
+                return teamsList;
             }
         }
     );
-
-    console.log('get contents by class id after');
-
-    //insert into
-    //const contents = await ContentFaker.getAllContentsByClassId(id);
-    return 'contents';
 }
 
 exports.insertService = insertService;
