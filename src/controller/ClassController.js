@@ -5,6 +5,7 @@ var Q = require('q');
 
 var ClassService = require('../service/ClassService.js');
 var ClassServiceFake = require('../service/ClassServiceFake.js');
+var RoomService = require('../service/RoomService');
 
 exports.getClassWithIdController = async function (request, resp) {
     try {
@@ -72,9 +73,26 @@ exports.getRoomsByClassId = async function (request, resp) {
     try {
         const id = request.params.id;
         const contents = await ClassServiceFake.getRoomByClassId(id);
+
         var response = {
             success: true,
             message: `All rooms from class ${id} retrieved successfully`,
+            data: contents
+        }
+        return resp.response(response);
+    } catch (error) {
+        return resp.response(error).code(500);
+    }
+}
+
+exports.getAllRooms = async function (request, resp) {
+    try {
+        const id = request.params.id;
+        const contents = await ClassService.getAllRooms();
+
+        var response = {
+            success: true,
+            message: `All rooms from Rooms Microservice were retrieved successfully`,
             data: contents
         }
         return resp.response(response);
