@@ -101,10 +101,57 @@ exports.getAllRooms = async function (request, resp) {
     }
 }
 
+exports.getAllEvaluations = async function (request, resp) {
+    try {
+        const contents = await ClassService.getAllEvaluations();
+
+        var response = {
+            success: true,
+            message: `All evaluations from evalutaion Microservice were retrieved successfully`,
+            data: contents
+        }
+        return resp.response(response);
+    } catch (error) {
+        return resp.response(error).code(500);
+    }
+}
+
+exports.deleteEvaluationWithId = async function (request, resp) {
+    try {
+        const id = request.params.id;
+        const contents = await ClassService.deleteEvaluationWithId(id);
+
+        var response = {
+            success: true,
+            message: `Evaluation with id ${id} was deleted successfully`,
+            data: contents
+        }
+        return resp.response(response);
+    } catch (error) {
+        return resp.response(error).code(500);
+    }
+}
+
+exports.postEvaluationWithId = async function (request, resp) {
+    try {
+        const id = request.params.id;
+        const contents = await ClassService.postEvaluationWithId(request.payload, id);
+
+        var response = {
+            success: true,
+            message: `Evaluation with id ${id} was created successfully`,
+            data: contents
+        }
+        return resp.response(response);
+    } catch (error) {
+        return resp.response(error).code(500);
+    }
+}
+
 exports.getEvaluationsByClassId = async function (request, resp) {
     try {
         const id = request.params.id;
-        const contents = await ClassServiceFake.getEvaluationsByClassId(id);
+        const contents = await ClassService.getEvaluationWithId(id);
         var response = {
             success: true,
             message: `All evaluations from class ${id} retrieved successfully`,
