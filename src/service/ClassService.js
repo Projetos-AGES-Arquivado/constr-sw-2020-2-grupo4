@@ -96,6 +96,5 @@ exports.getAllClassesService = getAllClassesService;
 exports.deleteClassWithIdService = deleteClassWithIdService;
 exports.updateClassWithIdService = updateClassWithIdService;
 exports.deleteAllClassesService = deleteAllClassesService;
-exports.getTeamsByClassId = getTeamsByClassId;
 exports.getContentsByClassId = getContentsByClassId;
 exports.getAllRooms = getAllRooms;
