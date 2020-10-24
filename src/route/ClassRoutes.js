@@ -170,6 +170,20 @@ module.exports = [
     },
     {
         method: HTTPMethod.GET,
+        path: "/classes/rooms",
+        options: {
+            validate: {
+                failAction: FailureHandlerController.failureHandler
+            },
+            auth: "simple",
+            description: "Returns all rooms from external microservice",
+            notes: "Returns all rooms from external microservice",
+            tags: ["api", "Class", "Rooms"],
+            handler: ClassController.getAllRooms
+        }
+    },
+    {
+        method: HTTPMethod.GET,
         path: "/classes/{id}/teams",
         options: {
             validate: {

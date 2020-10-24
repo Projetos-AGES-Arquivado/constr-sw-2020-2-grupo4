@@ -1,5 +1,6 @@
 var ClassModel = require('../model/ClassModel');
 var HttpRequests = require('../external/HttpRequests');
+const RoomService = require('../service/RoomService');
 
 const insertService = async (data) => {
     //insert into
@@ -65,33 +66,8 @@ const updateClassWithIdService = async (id, payload) => {
     return result
 }
 
-const getTeamsByClassId = async (id) => {
-
-    console.log('get contents by class id');
-
-    HttpRequests.sendRequest(
-        null,
-        {
-            host: 'ec2-34-238-114-89.compute-1.amazonaws.com',
-            path: '/turma',
-            port: '3000',
-            method: 'GET'
-        },
-        (response, error) => {
-            if (error) {
-                //reject(error);
-            } else {
-                console.log(response)
-                //resolve(response.toString('utf-8'));
-            }
-        }
-    );
-
-    console.log('get contents by class id after');
-
-    //insert into
-    //const contents = await ContentFaker.getAllContentsByClassId(id);
-    return 'contents';
+const getAllRooms = async () => {
+    return await RoomService.externalGetAllRooms();
 }
 
 const getContentsByClassId = async (id) => {
@@ -122,3 +98,4 @@ exports.updateClassWithIdService = updateClassWithIdService;
 exports.deleteAllClassesService = deleteAllClassesService;
 exports.getTeamsByClassId = getTeamsByClassId;
 exports.getContentsByClassId = getContentsByClassId;
+exports.getAllRooms = getAllRooms;
