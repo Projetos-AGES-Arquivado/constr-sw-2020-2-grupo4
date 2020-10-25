@@ -24,18 +24,6 @@ const externalGetEvaluationWithId = async (id) => {
     return JSON.parse(response)
 }
 
-
-const externalDeleteEvaluationWithId = async (id) => {
-    const options = {
-        hostname: EvaluationExternalService.HOSTNAME,
-        path: `${EvaluationExternalService.DELETE}/${id}`,
-        port: EvaluationExternalService.PORT,
-        method: HttpMethod.DELETE
-    };
-    var response = await HttpRequests.sendRequest('', options);
-    return JSON.parse(response)
-}
-
 const postEvaluationWithId = async (payload, id) => {
     const options = {
         hostname: EvaluationExternalService.HOSTNAME,
@@ -49,5 +37,4 @@ const postEvaluationWithId = async (payload, id) => {
 }
 exports.externalGetAllEvaluations = externalGetAllEvaluations;
 exports.externalGetEvaluationWithId = externalGetEvaluationWithId;
-exports.externalDeleteEvaluationWithId = externalDeleteEvaluationWithId;
 exports.postEvaluationWithId = postEvaluationWithId;

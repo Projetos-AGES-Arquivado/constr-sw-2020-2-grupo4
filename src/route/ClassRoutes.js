@@ -4,7 +4,6 @@ const ClassController = require('../controller/ClassController.js');
 const HealthController = require('../controller/HealthController.js');
 const FailureHandlerController = require('../controller/FailureHandlerController.js');
 const ClassValidator = require('../validator/ClassValidator.js');
-const EvaluationValidator = require('../validator/EvaluationValidator.js');
 const HTTPMethod = require('../config/HTTPMethod.js')
 
 module.exports = [
@@ -183,37 +182,6 @@ module.exports = [
             handler: ClassController.getAllEvaluations
         }
     },
-    {
-        method: HTTPMethod.DELETE,
-        path: "/classes/evaluations/{id}",
-        options: {
-            validate: {
-                params: ClassValidator.idParameterValidator,
-                failAction: FailureHandlerController.failureHandler
-            },
-            auth: "simple",
-            description: "Delete evalutaion from external microservice with provided id",
-            notes: "Delete evalutaion from external microservice with provided id",
-            tags: ["api", "Class", "Evaluations"],
-            handler: ClassController.deleteEvaluationWithId
-        }
-    },
-/*     {
-        method: HTTPMethod.POST,
-        path: "/classes/evaluations/{id}",
-        options: {
-            validate: {
-                payload: EvaluationValidator.postEvaluationSchema,
-                params: ClassValidator.idParameterValidator,
-                failAction: FailureHandlerController.failureHandler
-            },
-            auth: "simple",
-            description: "Delete evalutaion from external microservice with provided id",
-            notes: "Delete evalutaion from external microservice with provided id",
-            tags: ["api", "Class", "Evaluations"],
-            handler: ClassController.postEvaluationWithId
-        }
-    }, */
     {
         method: HTTPMethod.GET,
         path: "/classes/rooms",

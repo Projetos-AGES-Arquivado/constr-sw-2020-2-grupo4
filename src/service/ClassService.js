@@ -79,10 +79,6 @@ const getEvaluationWithId = async(id) => {
     return await EvaluationService.externalGetEvaluationWithId(id);
 }
 
-const deleteEvaluationWithId = async(id) => {
-    return await EvaluationService.externalDeleteEvaluationWithId(id);
-}
-
 const postEvaluationWithId = async(payload, id) =>{
     return await EvaluationService.postEvaluationWithId(payload, id);
 }
@@ -96,5 +92,4 @@ exports.deleteAllClassesService = deleteAllClassesService;
 exports.getAllRooms = getAllRooms;
 exports.getAllEvaluations = getAllEvaluations;
 exports.getEvaluationWithId = getEvaluationWithId;
-exports.deleteEvaluationWithId = deleteEvaluationWithId;
 exports.postEvaluationWithId = postEvaluationWithId;
