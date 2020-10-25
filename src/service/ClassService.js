@@ -1,6 +1,7 @@
 var ClassModel = require('../model/ClassModel');
 var HttpRequests = require('../external/HttpRequests');
 const RoomService = require('../service/RoomService');
+const EvaluationService = require('../service/EvaluationService');
 
 const insertService = async (data) => {
     //insert into
@@ -70,6 +71,15 @@ const getAllRooms = async () => {
     return await RoomService.externalGetAllRooms();
 }
 
+const getAllEvaluations = async() => {
+    return await EvaluationService.externalGetAllEvaluations();
+}
+
+const getEvaluationWithId = async(id) => {
+    return await EvaluationService.externalGetEvaluationWithId(id);
+}
+
+
 exports.insertService = insertService;
 exports.getClassWithIdService = getClassWithIdService;
 exports.getAllClassesService = getAllClassesService;
@@ -77,3 +87,5 @@ exports.deleteClassWithIdService = deleteClassWithIdService;
 exports.updateClassWithIdService = updateClassWithIdService;
 exports.deleteAllClassesService = deleteAllClassesService;
 exports.getAllRooms = getAllRooms;
+exports.getAllEvaluations = getAllEvaluations;
+exports.getEvaluationWithId = getEvaluationWithId;
