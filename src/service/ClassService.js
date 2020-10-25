@@ -1,6 +1,7 @@
 var ClassModel = require('../model/ClassModel');
 var HttpRequests = require('../external/HttpRequests');
 const RoomService = require('../service/RoomService');
+const ContentService = require('../service/ContentService');
 
 const insertService = async (data) => {
     //insert into
@@ -71,22 +72,8 @@ const getAllRooms = async () => {
 }
 
 const getContentsByClassId = async (id) => {
-    return await HttpRequests.sendRequest(
-        null,
-        {
-            host: '3.21.130.129',
-            path: '/content',
-            port: '5000',
-            method: 'GET'
-        },
-        (response, error) => {
-            if (error) {
-                console.log(error)
-            } else {
-                console.log(response)
-            }
-        }
-    );
+    const response = await ContentService.externalGetContentById('5f8788215b77ac0e6eef5562');
+    return response;
 }
 
 exports.insertService = insertService;
