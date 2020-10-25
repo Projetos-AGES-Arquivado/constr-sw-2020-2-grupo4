@@ -23,18 +23,5 @@ const externalGetEvaluationWithId = async (id) => {
     var response = await HttpRequests.sendRequest('', options);
     return JSON.parse(response)
 }
-
-const postEvaluationWithId = async (payload, id) => {
-    const options = {
-        hostname: EvaluationExternalService.HOSTNAME,
-        path: `${EvaluationExternalService.POST}/${id}`,
-        port: EvaluationExternalService.PORT,
-        method: HttpMethod.POST
-    };
-    console.log(JSON.parse(payload))
-    var response = await HttpRequests.sendRequest(payload, options);
-    return JSON.parse(response)
-}
 exports.externalGetAllEvaluations = externalGetAllEvaluations;
 exports.externalGetEvaluationWithId = externalGetEvaluationWithId;
-exports.postEvaluationWithId = postEvaluationWithId;

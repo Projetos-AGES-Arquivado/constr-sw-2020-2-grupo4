@@ -89,4 +89,3 @@ exports.deleteAllClassesService = deleteAllClassesService;
 exports.getAllRooms = getAllRooms;
 exports.getAllEvaluations = getAllEvaluations;
 exports.getEvaluationWithId = getEvaluationWithId;
-exports.postEvaluationWithId = postEvaluationWithId;
