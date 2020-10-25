@@ -1,5 +1,6 @@
 var ClassModel = require('../model/ClassModel');
 var HttpRequests = require('../external/HttpRequests');
+const TeamService = require('../service/TeamService');
 
 const insertService = async (data) => {
     //insert into
@@ -67,30 +68,9 @@ const updateClassWithIdService = async (id, payload) => {
 
 const getTeamsByClassId = async (id) => {
 
-    console.log('get contents by class id');
-
-    //var res = JSON.parse(response)
+    return await TeamService.externalGetTeamsbyId(id);
 
 
-
-    var res = await HttpRequests.sendRequest(
-        null,
-        {
-            host: 'ec2-34-238-114-89.compute-1.amazonaws.com',
-            path: `/turma`,
-            port: '3000',
-            method: 'GET'
-        })
-
-    let teamsList = []
-    res = JSON.parse(res)
-    for (let i = 0; i < res.length; i++) {
-        if (res[i].aulas.includes(id)) {
-            teamsList.push(res[i])
-        }
-    }
-
-    return teamsList
 }
 
 exports.insertService = insertService;
