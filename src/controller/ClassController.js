@@ -134,13 +134,18 @@ exports.getEvaluationsByClassId = async function (request, resp) {
 exports.getContentsByClassId = async function (request, resp) {
     try {
         const id = request.params.id;
-        const contents = await ClassServiceFake.getContentsByClassId(request.params.id);
-        var response = {
-            success: true,
-            message: `All contents from class ${id} retrieved successfully`,
-            data: contents
+        const contents = await ClassService.getContentsByClassId(request.params.id);
+        if(!contents){
+            return resp.response({
+                success: false,
+                message: `No contents found with for class with id ${id}`,
+            }).code(404);
         }
-        return resp.response(response);
+        return resp.response({
+            success: true,
+            message: `All contents from class ${id} retreived`,
+            data: contents
+        }).code(200);
     } catch (error) {
         return resp.response(error).code(500);
     }
