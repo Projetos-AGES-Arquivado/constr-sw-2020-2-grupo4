@@ -72,9 +72,9 @@ const getAllRooms = async () => {
 }
 
 const getContentsByClassId = async (id) => {
-    //Remove static ID
-    const response = await ContentService.externalGetContentById('5f8788215b77ac0e6eef55621');
     try{
+        const c = await getClassWithIdService(id);
+        const response = await ContentService.externalGetContentById(c.content);
         return JSON.parse(response)
     }catch (e){
         return false;

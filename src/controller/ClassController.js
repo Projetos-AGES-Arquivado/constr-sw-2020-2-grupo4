@@ -123,7 +123,7 @@ exports.getContentsByClassId = async function (request, resp) {
         if(!contents){
             return resp.response({
                 success: false,
-                message: `No contents found with id ${id}`,
+                message: `No contents found with for class with id ${id}`,
             }).code(404);
         }
         return resp.response({
