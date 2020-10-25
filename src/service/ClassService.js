@@ -1,6 +1,8 @@
 var ClassModel = require('../model/ClassModel');
 var HttpRequests = require('../external/HttpRequests');
 const TeamService = require('../service/TeamService');
+const RoomService = require('../service/RoomService');
+
 
 const insertService = async (data) => {
     //insert into
@@ -66,11 +68,13 @@ const updateClassWithIdService = async (id, payload) => {
     return result
 }
 
+
 const getTeamsByClassId = async (id) => {
-
     return await TeamService.externalGetTeamsbyId(id);
+}
 
-
+const getAllRooms = async () => {
+    return await RoomService.externalGetAllRooms();
 }
 
 exports.insertService = insertService;
@@ -79,4 +83,4 @@ exports.getAllClassesService = getAllClassesService;
 exports.deleteClassWithIdService = deleteClassWithIdService;
 exports.updateClassWithIdService = updateClassWithIdService;
 exports.deleteAllClassesService = deleteAllClassesService;
-exports.getTeamsByClassId = getTeamsByClassId;
+exports.getAllRooms = getAllRooms;
