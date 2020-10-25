@@ -8,12 +8,18 @@ const EvaluationService = require('../service/EvaluationService');
 
 const insertService = async (data) => {
     //insert into
+    const responseFromRoomService = await RoomService.externalGetRoomById(data.room)
+
+    if(responseFromRoomService.status_code != undefined) {
+        responseFromRoomService.message = `Could not found Room with Id: ${data.room}.`
+        return responseFromRoomService;
+    }
 
     const classModel = new ClassModel(data);
     try {
-        console.log('insert from data from service ', data);
+        //console.log('insert from data from service ', data);
         result = await classModel.save();
-        console.log('salvo no banco ', result);
+        //console.log('salvo no banco ', result);
     } catch (error) {
         console.log('error ', error);
     }

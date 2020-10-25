@@ -9,7 +9,15 @@ var RoomService = require('../service/RoomService');
 
 exports.getClassWithIdController = async function (request, resp) {
     try {
-        let classModel = await ClassService.getClassWithIdService(request.params.id);
+        const classModel = await ClassService.getClassWithIdService(request.params.id);
+        let retrievedRoom = await RoomService.externalGetRoomById(classModel.room);
+
+        if(request.query.expanded !== undefined) {
+            if(request.query.expanded === 'room') {
+                classModel.room = retrievedRoom;
+            }
+        }
+
         let response;
         if(classModel){
             response = {
@@ -34,11 +42,17 @@ exports.getClassWithIdController = async function (request, resp) {
 exports.insertController = async function (request, resp) {
     try {
         let response = await ClassService.insertService(request.payload);
+        let dataMessage = 'Class created successfully';
+        let dataSuccess = true;
+        if(response.status_code == '404') {
+            dataSuccess = false;
+            dataMessage = 'Class was not created.';
+        }
         let data;
         if(response){
             data = {
-                success: true,
-                message: "Class created successfully",
+                success: dataSuccess,
+                message: dataMessage,
                 data: response
             }
             return resp.response(data).code(201);

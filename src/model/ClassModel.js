@@ -12,7 +12,7 @@ const ClassModel = mongoose.model('class', {
         required: false
     },
     room: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed,
         required: false
     },
     team: {
