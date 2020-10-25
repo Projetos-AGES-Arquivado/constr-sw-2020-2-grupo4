@@ -2,6 +2,7 @@ const http = require('http');
 const Chalk = require('chalk');
 
 exports.sendRequest = (requestBody, options) => new Promise((resolve, reject) => { 
+
     //Defines a const that caries the url of the request
     const url = `${options.hostname}${options.path}`;
     //Creates the request

@@ -51,13 +51,12 @@ exports.insertController = async function (request, resp) {
 exports.getTeamsByClassId = async function (request, resp) {
     try {
         let id = request.params.id
-        let contents = await ClassService.getTeamsByClassId(request.params.id);
+        let contents = await ClassService.getTeamsByClassId(id);
         var response = {
             success: true,
             message: `All teams from class ${id} retrieved successfully`,
             data: contents
         }
-
         console.log('contents ', contents);
 
         return resp.response(response);
