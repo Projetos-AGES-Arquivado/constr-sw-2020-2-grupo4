@@ -79,9 +79,6 @@ const getEvaluationWithId = async(id) => {
     return await EvaluationService.externalGetEvaluationWithId(id);
 }
 
-const postEvaluationWithId = async(payload, id) =>{
-    return await EvaluationService.postEvaluationWithId(payload, id);
-}
 
 exports.insertService = insertService;
 exports.getClassWithIdService = getClassWithIdService;
