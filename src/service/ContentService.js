@@ -10,7 +10,7 @@ const externalGetAllContents = async () => {
         method: HttpMethod.GET
     };
     try{
-        return JSON.parse(await HttpRequests.sendRequest('', options));
+        return await HttpRequests.sendRequest('', options);
     }catch (e){
         return e;
     }
@@ -24,7 +24,7 @@ const externalGetContentById = async (id) => {
         method: HttpMethod.GET
     };
     try{
-        return JSON.parse(await HttpRequests.sendRequest('', options));
+        return await HttpRequests.sendRequest('', options);
     }catch (e){
         return e;
     }

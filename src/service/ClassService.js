@@ -72,8 +72,13 @@ const getAllRooms = async () => {
 }
 
 const getContentsByClassId = async (id) => {
-    const response = await ContentService.externalGetContentById('5f8788215b77ac0e6eef5562');
-    return response;
+    //Remove static ID
+    const response = await ContentService.externalGetContentById('5f8788215b77ac0e6eef55621');
+    try{
+        return JSON.parse(response)
+    }catch (e){
+        return false;
+    }
 }
 
 exports.insertService = insertService;
