@@ -71,7 +71,7 @@ const getAllRooms = async () => {
 }
 
 const getContentsByClassId = async (id) => {
-    HttpRequests.sendRequest(
+    return await HttpRequests.sendRequest(
         null,
         {
             host: '3.21.130.129',
@@ -87,7 +87,6 @@ const getContentsByClassId = async (id) => {
             }
         }
     );
-    return 'contents';
 }
 
 exports.insertService = insertService;
