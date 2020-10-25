@@ -1,9 +1,10 @@
 const http = require('http');
 const Chalk = require('chalk');
 
-exports.sendRequest = function(requestBody, options, callback) {
+
+exports.sendRequest = (requestBody, options) => new Promise((resolve, reject) => {
     //Defines a const that caries the url of the request
-    const url = ` ${options.hostname}${options.path}`;
+    const url = `${options.hostname}${options.path}`;
     //Creates the request
     const req = http.request(options, res => {
         //Declares a variable that will hold the body
@@ -19,20 +20,13 @@ exports.sendRequest = function(requestBody, options, callback) {
             //Log the status code and url
             console.log(Chalk.green(`${Chalk.blue(res.statusCode)} <- ${url}`));
 
-            //Check if the request was not successful
-            if (res.statusCode > 400) {
-                //Return the body as a error
-                callback(null, body);
-            } else {
-                //Return the body
-                callback(body, null);
-            }
+            resolve(body);
         });
     }).on('error', error => {
         //Log the error
         console.log(Chalk.red(`${Chalk.white(error)} <- ${url}`));
         //Return the error
-        callback(null, error);
+        reject(error);
     });
 
     //Log the request
@@ -46,4 +40,4 @@ exports.sendRequest = function(requestBody, options, callback) {
 
     //Ends the request
     req.end();
-};
+});

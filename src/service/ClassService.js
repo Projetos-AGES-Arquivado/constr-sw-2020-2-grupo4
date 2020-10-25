@@ -69,34 +69,28 @@ const getTeamsByClassId = async (id) => {
 
     console.log('get contents by class id');
 
-    return HttpRequests.sendRequest(
+    //var res = JSON.parse(response)
+
+
+
+    var res = await HttpRequests.sendRequest(
         null,
         {
             host: 'ec2-34-238-114-89.compute-1.amazonaws.com',
-            path: '/turma',
+            path: `/turma`,
             port: '3000',
             method: 'GET'
-        },
-        (response, error) => {
-            if (error) {
-                console.log(error)
-                //reject(error);
-            } else {
+        })
 
-                response = JSON.parse(response)
-                let teamsList = []
-                for (let i = 0; i < response.length; i++) {
-                    if (response[i].aulas.includes(id)) {
-                        teamsList.push(response[i])
-                    }
-                }
-
-                //console.log(teamsList)
-                //resolve(response.toString('utf-8'));
-                return teamsList;
-            }
+    let teamsList = []
+    res = JSON.parse(res)
+    for (let i = 0; i < res.length; i++) {
+        if (res[i].aulas.includes(id)) {
+            teamsList.push(res[i])
         }
-    );
+    }
+
+    return teamsList
 }
 
 exports.insertService = insertService;
