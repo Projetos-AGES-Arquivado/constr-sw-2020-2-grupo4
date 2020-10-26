@@ -140,7 +140,7 @@ module.exports = [
     },
     {
         method: HTTPMethod.GET,
-        path: "/classes/{id}/evaluations",
+        path: "/classes/evaluations/{id}",
         options: {
             validate: {
                 params: ClassValidator.idParameterValidator,
@@ -166,6 +166,34 @@ module.exports = [
             notes: "Returns all rooms for a class",
             tags: ["api", "Class", "Rooms"],
             handler: ClassController.getRoomsByClassId
+        }
+    },
+    {
+        method: HTTPMethod.GET,
+        path: "/classes/evaluations",
+        options: {
+            validate: {
+                failAction: FailureHandlerController.failureHandler
+            },
+            auth: "simple",
+            description: "Returns all evalutaions from external microservice",
+            notes: "Returns all evalutaions from external microservice",
+            tags: ["api", "Class", "Evaluations"],
+            handler: ClassController.getAllEvaluations
+        }
+    },
+    {
+        method: HTTPMethod.GET,
+        path: "/classes/rooms",
+        options: {
+            validate: {
+                failAction: FailureHandlerController.failureHandler
+            },
+            auth: "simple",
+            description: "Returns all rooms from external microservice",
+            notes: "Returns all rooms from external microservice",
+            tags: ["api", "Class", "Rooms"],
+            handler: ClassController.getAllRooms
         }
     },
     {

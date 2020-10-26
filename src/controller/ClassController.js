@@ -5,10 +5,19 @@ var Q = require('q');
 
 var ClassService = require('../service/ClassService.js');
 var ClassServiceFake = require('../service/ClassServiceFake.js');
+var RoomService = require('../service/RoomService');
 
 exports.getClassWithIdController = async function (request, resp) {
     try {
-        let classModel = await ClassService.getClassWithIdService(request.params.id);
+        const classModel = await ClassService.getClassWithIdService(request.params.id);
+        let retrievedRoom = await RoomService.externalGetRoomById(classModel.room);
+
+        if(request.query.expanded !== undefined) {
+            if(request.query.expanded === 'room') {
+                classModel.room = retrievedRoom;
+            }
+        }
+
         let response;
         if(classModel){
             response = {
@@ -34,10 +43,17 @@ exports.insertController = async function (request, resp) {
     try {
         let response = await ClassService.insertService(request.payload);
         let data;
+        if(!response) {
+            data = {
+                success: false,
+                message: "Could not create class."
+            }
+            return resp.response(data).code(400);
+        }
         if(response){
             data = {
                 success: true,
-                message: "Class created successfully",
+                message: "Class created successfully!",
                 data: response
             }
             return resp.response(data).code(201);
@@ -50,14 +66,19 @@ exports.insertController = async function (request, resp) {
 exports.getTeamsByClassId = async function (request, resp) {
     try {
         let id = request.params.id
-        let contents = await ClassServiceFake.getTeamsByClassId(request.params.id);
+        let contents = await ClassService.getTeamsByClassId(id);
         var response = {
             success: true,
             message: `All teams from class ${id} retrieved successfully`,
             data: contents
         }
+        console.log('contents ', contents);
+
         return resp.response(response);
     } catch (error) {
+
+        console.log('errors ', error);
+
         return resp.response(error).code(500);
     }
 }
@@ -66,6 +87,7 @@ exports.getRoomsByClassId = async function (request, resp) {
     try {
         const id = request.params.id;
         const contents = await ClassServiceFake.getRoomByClassId(id);
+
         var response = {
             success: true,
             message: `All rooms from class ${id} retrieved successfully`,
@@ -77,10 +99,41 @@ exports.getRoomsByClassId = async function (request, resp) {
     }
 }
 
+exports.getAllRooms = async function (request, resp) {
+    try {
+        const id = request.params.id;
+        const contents = await ClassService.getAllRooms();
+
+        var response = {
+            success: true,
+            message: `All rooms from Rooms Microservice were retrieved successfully`,
+            data: contents
+        }
+        return resp.response(response);
+    } catch (error) {
+        return resp.response(error).code(500);
+    }
+}
+
+exports.getAllEvaluations = async function (request, resp) {
+    try {
+        const contents = await ClassService.getAllEvaluations();
+
+        var response = {
+            success: true,
+            message: `All evaluations from evalutaion Microservice were retrieved successfully`,
+            data: contents
+        }
+        return resp.response(response);
+    } catch (error) {
+        return resp.response(error).code(500);
+    }
+}
+
 exports.getEvaluationsByClassId = async function (request, resp) {
     try {
         const id = request.params.id;
-        const contents = await ClassServiceFake.getEvaluationsByClassId(id);
+        const contents = await ClassService.getEvaluationWithId(id);
         var response = {
             success: true,
             message: `All evaluations from class ${id} retrieved successfully`,
@@ -95,13 +148,18 @@ exports.getEvaluationsByClassId = async function (request, resp) {
 exports.getContentsByClassId = async function (request, resp) {
     try {
         const id = request.params.id;
-        const contents = await ClassServiceFake.getContentsByClassId(id);
-        var response = {
-            success: true,
-            message: `All contents from class ${id} retrieved successfully`,
-            data: contents
+        const contents = await ClassService.getContentsByClassId(request.params.id);
+        if(!contents){
+            return resp.response({
+                success: false,
+                message: `No contents found with for class with id ${id}`,
+            }).code(404);
         }
-        return resp.response(response);
+        return resp.response({
+            success: true,
+            message: `All contents from class ${id} retreived`,
+            data: contents
+        }).code(200);
     } catch (error) {
         return resp.response(error).code(500);
     }

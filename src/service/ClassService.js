@@ -1,17 +1,32 @@
 var ClassModel = require('../model/ClassModel');
+var HttpRequests = require('../external/HttpRequests');
+const TeamService = require('../service/TeamService');
+const RoomService = require('../service/RoomService');
+const ContentService = require('../service/ContentService');
+const EvaluationService = require('../service/EvaluationService');
+
 
 const insertService = async (data) => {
-    //insert into
-
-    const classModel = new ClassModel(data);
-    try {
-        console.log('insert from data from service ', data);
-        result = await classModel.save();
-        console.log('salvo no banco ', result);
-    } catch (error) {
-        console.log('error ', error);
-    }
-    return result
+    const responseFromRoomService = RoomService.externalGetRoomById(data.room)
+    const responseFromContentService = ContentService.externalGetContentById(data.content)
+    const responseFromEvaluationService = EvaluationService.externalGetEvaluationWithId(data.evaluation)
+    const responseFromTeamService = TeamService.externalGetTeamsbyId(data.team)
+    
+    return Promise.all([responseFromRoomService, responseFromContentService, responseFromEvaluationService, responseFromTeamService])
+        .then(async (values) => {
+            if(values.some(e => (e.errno || e.error || e.getStatus !== undefined))){
+                return false;
+            }
+            else{
+                const classModel = new ClassModel(data);
+                try {
+                    result = await classModel.save();
+                } catch (error) {
+                    console.log('error ', error);
+                }
+                return result
+            }
+        })
 }
 
 const getClassWithIdService = async (id) => {
@@ -64,9 +79,39 @@ const updateClassWithIdService = async (id, payload) => {
     return result
 }
 
+
+const getTeamsByClassId = async (id) => {
+    return await TeamService.externalGetTeamsbyId(id);
+}
+
+const getAllRooms = async () => {
+    return await RoomService.externalGetAllRooms();
+}
+
+const getContentsByClassId = async (id) => {
+    try{
+        const c = await getClassWithIdService(id);
+        return await ContentService.externalGetContentById(c.content);
+    }catch (e){
+        return false;
+    }
+}
+
+const getAllEvaluations = async() => {
+    return await EvaluationService.externalGetAllEvaluations();
+}
+
+const getEvaluationWithId = async(id) => {
+    return await EvaluationService.externalGetEvaluationWithId(id);
+}
+
 exports.insertService = insertService;
 exports.getClassWithIdService = getClassWithIdService;
 exports.getAllClassesService = getAllClassesService;
 exports.deleteClassWithIdService = deleteClassWithIdService;
 exports.updateClassWithIdService = updateClassWithIdService;
 exports.deleteAllClassesService = deleteAllClassesService;
+exports.getContentsByClassId = getContentsByClassId;
+exports.getAllRooms = getAllRooms;
+exports.getAllEvaluations = getAllEvaluations;
+exports.getEvaluationWithId = getEvaluationWithId;
