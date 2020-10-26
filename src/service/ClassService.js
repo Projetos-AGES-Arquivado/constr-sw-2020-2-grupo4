@@ -7,23 +7,26 @@ const EvaluationService = require('../service/EvaluationService');
 
 
 const insertService = async (data) => {
-    //insert into
-    const responseFromRoomService = await RoomService.externalGetRoomById(data.room)
-
-    if(responseFromRoomService.status_code != undefined) {
-        responseFromRoomService.message = `Could not found Room with Id: ${data.room}.`
-        return responseFromRoomService;
-    }
-
-    const classModel = new ClassModel(data);
-    try {
-        //console.log('insert from data from service ', data);
-        result = await classModel.save();
-        //console.log('salvo no banco ', result);
-    } catch (error) {
-        console.log('error ', error);
-    }
-    return result
+    const responseFromRoomService = RoomService.externalGetRoomById(data.room)
+    const responseFromContentService = ContentService.externalGetContentById(data.content)
+    const responseFromEvaluationService = EvaluationService.externalGetEvaluationWithId(data.evaluation)
+    const responseFromTeamService = TeamService.externalGetTeamsbyId(data.team)
+    
+    return Promise.all([responseFromRoomService, responseFromContentService, responseFromEvaluationService, responseFromTeamService])
+        .then(async (values) => {
+            if(values.some(e => (e.errno || e.error || e.getStatus !== undefined))){
+                return false;
+            }
+            else{
+                const classModel = new ClassModel(data);
+                try {
+                    result = await classModel.save();
+                } catch (error) {
+                    console.log('error ', error);
+                }
+                return result
+            }
+        })
 }
 
 const getClassWithIdService = async (id) => {
@@ -88,8 +91,7 @@ const getAllRooms = async () => {
 const getContentsByClassId = async (id) => {
     try{
         const c = await getClassWithIdService(id);
-        const response = await ContentService.externalGetContentById(c.content);
-        return JSON.parse(response)
+        return await ContentService.externalGetContentById(c.content);
     }catch (e){
         return false;
     }
