@@ -14,7 +14,7 @@ const insertService = async (data) => {
     
     return Promise.all([responseFromRoomService, responseFromContentService, responseFromEvaluationService, responseFromTeamService])
         .then(async (values) => {
-            if(values.some(e => (e.errno || e.getStatus !== undefined))){
+            if(values.some(e => (e.errno || e.error || e.getStatus !== undefined))){
                 return false;
             }
             else{
