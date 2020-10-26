@@ -10,7 +10,7 @@ const externalGetAllContents = async () => {
         method: HttpMethod.GET
     };
     try{
-        return await HttpRequests.sendRequest('', options);
+        return JSON.parse(await HttpRequests.sendRequest('', options));
     }catch (e){
         return e;
     }
@@ -24,7 +24,15 @@ const externalGetContentById = async (id) => {
         method: HttpMethod.GET
     };
     try{
-        return await HttpRequests.sendRequest('', options);
+        const response = JSON.parse(await HttpRequests.sendRequest('', options));
+        if (response === 'Not Found') {
+            externalResponse = {
+                status_code: 404,
+                message: 'Not Found'
+            };
+            return externalResponse;
+        }
+        return response;
     }catch (e){
         return e;
     }

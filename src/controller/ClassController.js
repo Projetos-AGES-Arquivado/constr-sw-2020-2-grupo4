@@ -42,17 +42,18 @@ exports.getClassWithIdController = async function (request, resp) {
 exports.insertController = async function (request, resp) {
     try {
         let response = await ClassService.insertService(request.payload);
-        let dataMessage = 'Class created successfully';
-        let dataSuccess = true;
-        if(response.status_code == '404') {
-            dataSuccess = false;
-            dataMessage = 'Class was not created.';
-        }
         let data;
+        if(!response) {
+            data = {
+                success: false,
+                message: "Could not create class."
+            }
+            return resp.response(data).code(400);
+        }
         if(response){
             data = {
-                success: dataSuccess,
-                message: dataMessage,
+                success: true,
+                message: "Class created successfully!",
                 data: response
             }
             return resp.response(data).code(201);
