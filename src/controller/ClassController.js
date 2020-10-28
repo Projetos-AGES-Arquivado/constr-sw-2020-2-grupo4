@@ -6,18 +6,35 @@ var Q = require('q');
 var ClassService = require('../service/ClassService.js');
 var ClassServiceFake = require('../service/ClassServiceFake.js');
 var RoomService = require('../service/RoomService');
+var ContentService = require('../service/ContentService');
+var EvaluationService = require('../service/EvaluationService');
+var TeamService = require('../service/TeamService');
 
 exports.getClassWithIdController = async function (request, resp) {
     try {
         const classModel = await ClassService.getClassWithIdService(request.params.id);
-        let retrievedRoom = await RoomService.externalGetRoomById(classModel.room);
-
-        if(request.query.expanded !== undefined) {
-            if(request.query.expanded === 'room') {
-                classModel.room = retrievedRoom;
+        if(request.query.expanded !== undefined && classModel) {
+            const validOperations = [
+                {'service': 'content', 'op': ContentService.externalGetContentById},
+                {'service': 'team', 'op': TeamService.externalGetTeamsbyId},
+                {'service': 'room', 'op': RoomService.externalGetRoomById},
+                {'service': 'evaluation', 'op': EvaluationService.externalGetEvaluationWithId}
+            ];
+            if(!Array.isArray(request.query.expanded)){
+                const dataOperation = validOperations.filter(e => e.service === request.query.expanded);
+                if(dataOperation){
+                   classModel[request.query.expanded] = await dataOperation[0].op(classModel[request.query.expanded]);
+                }
+            }
+            else{
+                request.query.expanded.forEach(async (e) => {
+                    const index = validOperations.findIndex(j => j.service === e)
+                    if(index => 0){
+                        classModel[e] = await validOperations[index].op(classModel[e]);
+                    }
+                })
             }
         }
-
         let response;
         if(classModel){
             response = {
