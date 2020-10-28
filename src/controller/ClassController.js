@@ -12,7 +12,7 @@ var TeamService = require('../service/TeamService');
 
 exports.getClassWithIdController = async function (request, resp) {
     try {
-        const classModel = await ClassService.getClassWithIdService(request.params.id);
+        let classModel = await ClassService.getClassWithIdService(request.params.id);
         if(request.query.expanded !== undefined && classModel) {
             const validOperations = [
                 {'service': 'content', 'op': ContentService.externalGetContentById},
@@ -27,16 +27,20 @@ exports.getClassWithIdController = async function (request, resp) {
                 }
             }
             else{
-                request.query.expanded.forEach(async (e) => {
-                    const index = validOperations.findIndex(j => j.service === e)
+                for(const elem of request.query.expanded){
+                    const index = validOperations.findIndex(j => j.service === elem)
                     if(index >= 0){
-                        classModel[e] = await validOperations[index].op(classModel[e]);
+                        const opResult = await validOperations[index].op(classModel[elem]);
+                        if(!opResult || opResult.errno || opResult.error || opResult.getStatus !== undefined)
+                            return resp.response({success: false, message: "Error expanding request"}).code(400);
+                        classModel[validOperations[index].service] = opResult;
                     }
-                })
+                }
             }
         }
         let response;
         if(classModel){
+            console.log(classModel)
             response = {
                 success: true,
                 message: "Class retrieved successfully",
