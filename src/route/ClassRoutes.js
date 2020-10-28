@@ -11,7 +11,7 @@ module.exports = [
         method: HTTPMethod.GET,
         path: "/",
         options: {
-            auth: "simple",
+            // auth: "simple",
             description: "Index endpoint to test if application is up and running",
             notes: "Returns a hello world",
             tags: ["api", "Health"],
@@ -22,7 +22,7 @@ module.exports = [
         method: HTTPMethod.GET,
         path: "/classes/{id}",
         options: {
-            auth: "simple",
+            // auth: "simple",
             description: "Returns a class with given ID",
             notes: "Returns class information with given ID",
             tags: ["api", "Class"],
@@ -37,7 +37,7 @@ module.exports = [
         method: HTTPMethod.DELETE,
         path: "/classes/{id}",
         options: {
-            auth: "simple",
+            // auth: "simple",
             description: "Deletes a class with given ID",
             notes: "Deletes a class information with given ID",
             tags: ["api", "Class"],
@@ -52,7 +52,7 @@ module.exports = [
         method: HTTPMethod.DELETE,
         path: "/classes",
         options: {
-            auth: "simple",
+            // auth: "simple",
             description: "Deletes all classes",
             notes: "Deletes all classes from database",
             tags: ["api", "Class"],
@@ -63,7 +63,7 @@ module.exports = [
         method: HTTPMethod.PUT,
         path: "/classes/{id}",
         options: {
-            auth: "simple",
+            // auth: "simple",
             description: "Updates class info with given ID",
             notes: "Updates class info with given ID",
             tags: ["api", "Class"],
@@ -79,7 +79,7 @@ module.exports = [
         method: HTTPMethod.PATCH,
         path: "/classes/{id}",
         options: {
-            auth: "simple",
+            // auth: "simple",
             description: "Updates class info with given ID",
             notes: "Updates class info with given ID",
             tags: ["api", "Class"],
@@ -101,7 +101,7 @@ module.exports = [
         method: HTTPMethod.GET,
         path: "/classes",
         options: {
-            auth: "simple",
+            // auth: "simple",
             description: "Returns all classes",
             notes: "Returns all registered classes",
             tags: ["api", "Class"],
@@ -112,7 +112,7 @@ module.exports = [
         method: HTTPMethod.POST,
         path: "/classes",
         options: {
-            auth: "simple",
+            // auth: "simple",
             description: "Register new class",
             notes: "Register a class",
             tags: ["api", "Class"],
@@ -131,7 +131,7 @@ module.exports = [
                 params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
-            auth: "simple",
+            // auth: "simple",
             description: "Returns all contents from a class",
             notes: "Returns all contents for a class",
             tags: ["api", "Class", "Contents"],
@@ -146,7 +146,7 @@ module.exports = [
                 params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
-            auth: "simple",
+            // auth: "simple",
             description: "Returns all evaluations from a class",
             notes: "Returns all evaluations for a class",
             tags: ["api", "Class", "Evaluations"],
@@ -161,7 +161,7 @@ module.exports = [
                 params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
-            auth: "simple",
+            // auth: "simple",
             description: "Returns all rooms from a class",
             notes: "Returns all rooms for a class",
             tags: ["api", "Class", "Rooms"],
@@ -175,7 +175,7 @@ module.exports = [
             validate: {
                 failAction: FailureHandlerController.failureHandler
             },
-            auth: "simple",
+            // auth: "simple",
             description: "Returns all evalutaions from external microservice",
             notes: "Returns all evalutaions from external microservice",
             tags: ["api", "Class", "Evaluations"],
@@ -189,7 +189,7 @@ module.exports = [
             validate: {
                 failAction: FailureHandlerController.failureHandler
             },
-            auth: "simple",
+            // auth: "simple",
             description: "Returns all rooms from external microservice",
             notes: "Returns all rooms from external microservice",
             tags: ["api", "Class", "Rooms"],
@@ -204,7 +204,7 @@ module.exports = [
                 params: ClassValidator.idParameterValidator,
                 failAction: FailureHandlerController.failureHandler
             },
-            auth: "simple",
+            // auth: "simple",
             description: "Returns all teams from a class",
             notes: "Returns all teams for a class",
             tags: ["api", "Class", "Teams"],
