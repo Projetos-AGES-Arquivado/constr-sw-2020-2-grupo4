@@ -21,15 +21,15 @@ exports.getClassWithIdController = async function (request, resp) {
                 {'service': 'evaluation', 'op': EvaluationService.externalGetEvaluationWithId}
             ];
             if(!Array.isArray(request.query.expanded)){
-                const dataOperation = validOperations.filter(e => e.service === request.query.expanded);
-                if(dataOperation){
-                   classModel[request.query.expanded] = await dataOperation[0].op(classModel[request.query.expanded]);
+                const index = validOperations.findIndex(e => e.service === request.query.expanded);
+                if(index >= 0){
+                   classModel[request.query.expanded] = await validOperations[index].op(classModel[request.query.expanded]);
                 }
             }
             else{
                 request.query.expanded.forEach(async (e) => {
                     const index = validOperations.findIndex(j => j.service === e)
-                    if(index => 0){
+                    if(index >= 0){
                         classModel[e] = await validOperations[index].op(classModel[e]);
                     }
                 })
