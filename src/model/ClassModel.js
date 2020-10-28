@@ -8,7 +8,7 @@ const ClassModel = mongoose.model('class', {
         required: false
     },
     content: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed,
         required: false
     },
     room: {
@@ -16,11 +16,11 @@ const ClassModel = mongoose.model('class', {
         required: false
     },
     team: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed,
         required: false
     },
     evaluation: {
-        type: String,
+        type: mongoose.Schema.Types.Mixed,
         required: false
     },
     date: {

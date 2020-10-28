@@ -6,20 +6,41 @@ var Q = require('q');
 var ClassService = require('../service/ClassService.js');
 var ClassServiceFake = require('../service/ClassServiceFake.js');
 var RoomService = require('../service/RoomService');
+var ContentService = require('../service/ContentService');
+var EvaluationService = require('../service/EvaluationService');
+var TeamService = require('../service/TeamService');
 
 exports.getClassWithIdController = async function (request, resp) {
     try {
-        const classModel = await ClassService.getClassWithIdService(request.params.id);
-        let retrievedRoom = await RoomService.externalGetRoomById(classModel.room);
-
-        if(request.query.expanded !== undefined) {
-            if(request.query.expanded === 'room') {
-                classModel.room = retrievedRoom;
+        let classModel = await ClassService.getClassWithIdService(request.params.id);
+        if(request.query.expanded !== undefined && classModel) {
+            const validOperations = [
+                {'service': 'content', 'op': ContentService.externalGetContentById},
+                {'service': 'team', 'op': TeamService.externalGetTeamsbyId},
+                {'service': 'room', 'op': RoomService.externalGetRoomById},
+                {'service': 'evaluation', 'op': EvaluationService.externalGetEvaluationWithId}
+            ];
+            if(!Array.isArray(request.query.expanded)){
+                const index = validOperations.findIndex(e => e.service === request.query.expanded);
+                if(index >= 0){
+                   classModel[request.query.expanded] = await validOperations[index].op(classModel[request.query.expanded]);
+                }
+            }
+            else{
+                for(const elem of request.query.expanded){
+                    const index = validOperations.findIndex(j => j.service === elem)
+                    if(index >= 0){
+                        const opResult = await validOperations[index].op(classModel[elem]);
+                        if(!opResult || opResult.errno || opResult.error || opResult.getStatus !== undefined)
+                            return resp.response({success: false, message: "Error expanding request"}).code(400);
+                        classModel[validOperations[index].service] = opResult;
+                    }
+                }
             }
         }
-
         let response;
         if(classModel){
+            console.log(classModel)
             response = {
                 success: true,
                 message: "Class retrieved successfully",
