@@ -27,7 +27,7 @@ const externalGetRoomById = async (id) => {
 
     try {
         externalResponse = await HttpRequests.sendRequest('', options);
-        if (externalResponse === 'Not Found') {
+        if (externalResponse.toLowerCase() === 'not found') {
             externalResponse = {
                 status_code: 404,
                 message: 'Not Found'
