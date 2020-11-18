@@ -1,27 +1,29 @@
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
   <!-- Position Column -->
-  <ng-container matColumnDef="position">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> No. </th>
-    <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+  <ng-container matColumnDef="numero">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+    <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
   </ng-container>
 
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  <ng-container matColumnDef="disciplina">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Disciplina </th>
+    <td mat-cell *matCellDef="let element"> {{element.disciplina}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
-  <ng-container matColumnDef="weight">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight </th>
-    <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+  <ng-container matColumnDef="professor">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Professor </th>
+    <td mat-cell *matCellDef="let element"> {{element.professor}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
-  <ng-container matColumnDef="symbol">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol </th>
-    <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+  <ng-container matColumnDef="semestre">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Semeste </th>
+    <td mat-cell *matCellDef="let element"> {{element.semestre}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="sala">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sala </th>
+    <td mat-cell *matCellDef="let element"> {{element.sala}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
