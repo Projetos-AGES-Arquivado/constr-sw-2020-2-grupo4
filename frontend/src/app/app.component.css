@@ -4,8 +4,19 @@ main{
   align-items: center;
 }
 
-table {
+.table-container{
+  display: flex;
+  flex-direction: column;
   width: 80%;
+}
+
+.filter-field{
+  width: 180px;
+  align-self: flex-end;
+}
+
+table {
+  width: 100%;
   align-self: center;
 }
 
@@ -24,5 +35,5 @@ table {
 }
 
 table{
-box-shadow: none;
+  box-shadow: none;
 }

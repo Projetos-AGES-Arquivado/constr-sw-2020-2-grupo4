@@ -24,8 +24,14 @@ export class AppComponent implements OnInit, AfterViewInit {
     this.paginator = null;
   }
 
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
   ngOnInit(){
     this.evaluationService.getAllEvaluations().subscribe((data: Evaluation[]) => {
+      console.log(data);
       this.dataSource.data = data;
     })
   }
