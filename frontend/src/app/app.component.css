@@ -1,6 +1,7 @@
 main{
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 table {
@@ -20,4 +21,8 @@ table {
   margin-top: 4rem;
   text-align: center;
   font-weight: bold;
+}
+
+table{
+box-shadow: none;
 }

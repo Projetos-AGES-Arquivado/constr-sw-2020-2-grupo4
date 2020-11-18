@@ -1,19 +1,9 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
-import {ClassService} from './class.service';
-
-export interface IClass {
-  numero: number;
-  ano: number;
-  horario: string[];
-  semestre: number;
-  sala: string;
-  professor: string;
-  disciplina: string;
-  aulas: string[];
-  alunos: string[];
-}
+import {MatPaginator} from '@angular/material/paginator';
+import {Evaluation} from './interfaces/Evaluation';
+import {EvaluationService} from './services/evaluation.service';
 
 @Component({
   selector: 'app-root',
@@ -23,25 +13,26 @@ export interface IClass {
 
 export class AppComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['numero', 'disciplina', 'professor', 'semestre', 'sala'];
-  classes: IClass[] = [];
-  dataSource: MatTableDataSource<IClass>;
+  dataSource: MatTableDataSource<Evaluation>;
 
   @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator) paginator: MatPaginator | null;
 
-  constructor(private classService: ClassService) {
+  constructor(private evaluationService: EvaluationService) {
     this.dataSource = new MatTableDataSource();
     this.sort = new MatSort();
+    this.paginator = null;
   }
 
   ngOnInit(){
-    this.classService.getAllClasses().subscribe((data: IClass[]) => {
-      console.log(data)
+    this.evaluationService.getAllEvaluations().subscribe((data: Evaluation[]) => {
       this.dataSource.data = data;
     })
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
   }
 
 }

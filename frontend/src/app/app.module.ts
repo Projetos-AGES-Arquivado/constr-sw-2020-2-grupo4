@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from "@angular/material/table";
 import { MatSortModule } from "@angular/material/sort";
+import { MatPaginatorModule } from "@angular/material/paginator";
 import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
@@ -18,6 +19,7 @@ import { HttpClientModule } from '@angular/common/http'
     BrowserAnimationsModule,
     MatTableModule,
     MatSortModule,
+    MatPaginatorModule,
     HttpClientModule
   ],
   providers: [],
