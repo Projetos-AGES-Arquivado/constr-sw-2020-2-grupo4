@@ -1,31 +1,39 @@
-<table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+<main>
 
-  <!-- Position Column -->
-  <ng-container matColumnDef="numero">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
-    <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
-  </ng-container>
+  <div class="title-logo">
+    <img src="/assets/logo-pucrs.svg" />
+    <h1 class="mat-display-3">Exibição de turmas</h1>
+  </div>
 
-  <ng-container matColumnDef="disciplina">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Disciplina </th>
-    <td mat-cell *matCellDef="let element"> {{element.disciplina}} </td>
-  </ng-container>
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
-  <ng-container matColumnDef="professor">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Professor </th>
-    <td mat-cell *matCellDef="let element"> {{element.professor}} </td>
-  </ng-container>
+    <ng-container matColumnDef="numero">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Código </th>
+      <td mat-cell *matCellDef="let element"> {{element.numero}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="semestre">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Semeste </th>
-    <td mat-cell *matCellDef="let element"> {{element.semestre}} </td>
-  </ng-container>
+    <ng-container matColumnDef="disciplina">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Disciplina </th>
+      <td mat-cell *matCellDef="let element"> {{element.disciplina}} </td>
+    </ng-container>
 
-  <ng-container matColumnDef="sala">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Sala </th>
-    <td mat-cell *matCellDef="let element"> {{element.sala}} </td>
-  </ng-container>
+    <ng-container matColumnDef="professor">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Professor </th>
+      <td mat-cell *matCellDef="let element"> {{element.professor}} </td>
+    </ng-container>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+    <ng-container matColumnDef="semestre">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Semeste </th>
+      <td mat-cell *matCellDef="let element"> {{element.semestre}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="sala">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Sala </th>
+      <td mat-cell *matCellDef="let element"> {{element.sala}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</main>
