@@ -34,6 +34,17 @@ table {
   font-weight: bold;
 }
 
+.bottom-container{
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 1vh;
+}
+
+.buttonAdd {
+  font-weight: bold;
+  font-size: larger;
+}
+
 table{
   box-shadow: none;
 }
