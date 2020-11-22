@@ -15,7 +15,7 @@ const externalGetTeamsbyId = async (id) => {
     let teamsList = []
     response = JSON.parse(response)
     for (let i = 0; i < response.length; i++) {
-        if (response[i].aulas.includes(id)) {
+        if (response[i]._id === id) {
             teamsList.push(response[i])
         }
     }
@@ -23,5 +23,5 @@ const externalGetTeamsbyId = async (id) => {
     return teamsList
 }
 
-exports.externalGetTeamsbyId = externalGetTeamsbyId;
 
+exports.externalGetTeamsbyId = externalGetTeamsbyId;

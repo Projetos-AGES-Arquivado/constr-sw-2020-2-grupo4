@@ -14,7 +14,7 @@ const insertService = async (data) => {
     
     return Promise.all([responseFromRoomService, responseFromContentService, responseFromEvaluationService, responseFromTeamService])
         .then(async (values) => {
-            if(values.some(e => (e.errno || e.error || e.getStatus !== undefined))){
+            if(values.some(e => (e.errno || e.error || e.getStatus !== undefined || (Array.isArray(e) && e.length === 0)))){
                 return false;
             }
             else{
@@ -81,7 +81,8 @@ const updateClassWithIdService = async (id, payload) => {
 
 
 const getTeamsByClassId = async (id) => {
-    return await TeamService.externalGetTeamsbyId(id);
+    const curClass = await getClassWithIdService(id);
+    return await TeamService.externalGetTeamsbyId(curClass.team);
 }
 
 const getAllRooms = async () => {
@@ -115,3 +116,4 @@ exports.getContentsByClassId = getContentsByClassId;
 exports.getAllRooms = getAllRooms;
 exports.getAllEvaluations = getAllEvaluations;
 exports.getEvaluationWithId = getEvaluationWithId;
+exports.getTeamsByClassId = getTeamsByClassId;
