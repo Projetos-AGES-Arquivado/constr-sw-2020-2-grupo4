@@ -1,0 +1,4 @@
+<h1 mat-dialog-title>Questões</h1>
+<div mat-dialog-content>
+    <mat-card *ngFor="let item of data; let i = index">{{item.enunciado}}: <br>{{item.resposta}}</mat-card>
+</div>

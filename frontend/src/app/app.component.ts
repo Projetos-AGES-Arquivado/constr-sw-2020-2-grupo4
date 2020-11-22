@@ -4,6 +4,9 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {Evaluation} from './interfaces/Evaluation';
 import {EvaluationService} from './services/evaluation.service';
+import {MatDialog} from '@angular/material/dialog';
+import { Question } from './interfaces/Question';
+import { QuestionsComponent } from './dialog/questions/questions.component';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +15,13 @@ import {EvaluationService} from './services/evaluation.service';
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['numero', 'disciplina', 'professor', 'semestre', 'sala'];
+  displayedColumns: string[] = ['nome', 'grau', 'peso', 'descricao', 'questoes'];
   dataSource: MatTableDataSource<Evaluation>;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator | null;
 
-  constructor(private evaluationService: EvaluationService) {
+  constructor(private evaluationService: EvaluationService, public dialog: MatDialog) {
     this.dataSource = new MatTableDataSource();
     this.sort = new MatSort();
     this.paginator = null;
@@ -31,9 +34,13 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(){
     this.evaluationService.getAllEvaluations().subscribe((data: Evaluation[]) => {
-      console.log(data);
       this.dataSource.data = data;
     })
+  }
+
+  openDialog(data: Question[]) {
+    console.log(data)
+    this.dialog.open(QuestionsComponent, {data});
   }
 
   ngAfterViewInit(): void {
