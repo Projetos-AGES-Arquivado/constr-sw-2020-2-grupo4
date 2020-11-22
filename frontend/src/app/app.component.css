@@ -4,6 +4,17 @@ main{
   align-items: center;
 }
 
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background: #F0F0F5 url("../assets/background.svg") no-repeat;
+}
+
 .table-container{
   display: flex;
   flex-direction: column;
