@@ -13,13 +13,17 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from "@angular/material/button";
 import { MatDialogModule } from '@angular/material/dialog';
 import { QuestionsComponent } from './dialog/questions/questions.component';
-import { MatCardModule } from '@angular/material/card'
+import { MatCardModule } from '@angular/material/card';
+import { FormComponent } from './dialog/form/form.component'
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    QuestionsComponent
+    QuestionsComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -33,7 +37,9 @@ import { MatCardModule } from '@angular/material/card'
     HttpClientModule,
     MatButtonModule,
     MatDialogModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

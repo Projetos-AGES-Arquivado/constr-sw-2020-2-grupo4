@@ -1,3 +1,7 @@
+h1{
+  color: #41414D;
+}
+
 main{
   display: flex;
   flex-direction: column;

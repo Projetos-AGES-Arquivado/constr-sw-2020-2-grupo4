@@ -2,11 +2,12 @@ import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
-import {Evaluation} from './interfaces/Evaluation';
+import {IEvaluation} from './interfaces/IEvaluation';
 import {EvaluationService} from './services/evaluation.service';
 import {MatDialog} from '@angular/material/dialog';
 import { Question } from './interfaces/Question';
 import { QuestionsComponent } from './dialog/questions/questions.component';
+import { FormComponent } from './dialog/form/form.component';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,7 @@ import { QuestionsComponent } from './dialog/questions/questions.component';
 
 export class AppComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nome', 'grau', 'peso', 'descricao', 'questoes'];
-  dataSource: MatTableDataSource<Evaluation>;
+  dataSource: MatTableDataSource<IEvaluation>;
 
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator | null;
@@ -33,14 +34,17 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(){
-    this.evaluationService.getAllEvaluations().subscribe((data: Evaluation[]) => {
+    this.evaluationService.getAllEvaluations().subscribe((data: IEvaluation[]) => {
       this.dataSource.data = data;
     })
   }
 
-  openDialog(data: Question[]) {
-    console.log(data)
+  openQuestionsDialog(data: Question[]) {
     this.dialog.open(QuestionsComponent, {data});
+  }
+
+  openFormCreateDialog(){
+    this.dialog.open(FormComponent);
   }
 
   ngAfterViewInit(): void {
