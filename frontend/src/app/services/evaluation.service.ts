@@ -16,4 +16,8 @@ export class EvaluationService {
     return this.http.get<IEvaluation[]>(`${this.baseUrl}/avaliacoes`)
   }
 
+  saveEvaluation(data: IEvaluation){
+    return this.http.post<IEvaluation>(`${this.baseUrl}/avaliacoes`, data)
+  }
+
 }

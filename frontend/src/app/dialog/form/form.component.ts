@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, } from '@angular/forms';
+import { EvaluationService } from 'src/app/services/evaluation.service';
 import { Evaluation } from '../../models/Evaluation';
 
 @Component({
@@ -12,12 +13,14 @@ export class FormComponent implements OnInit {
   evaluationForm: FormGroup;
   evaluation: Evaluation;
 
+  @Output() emitService = new EventEmitter;
+
   arrayItems: {
     id: number;
     title: string;
   }[];
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private evaluationService: EvaluationService) {
     this.arrayItems = [];
     this.evaluation = new Evaluation();
     this.evaluationForm = this._formBuilder.group({
@@ -33,6 +36,10 @@ export class FormComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log(this.evaluationForm.value);
+    this.evaluationService.saveEvaluation(this.evaluationForm.value).subscribe(
+      data => this.emitService.next(data),
+      error => console.warn(error)
+    )
   }
+
 }

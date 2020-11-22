@@ -44,7 +44,12 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   openFormCreateDialog(){
-    this.dialog.open(FormComponent);
+    const ref = this.dialog.open(FormComponent);
+    ref.componentInstance.emitService.subscribe((emitted: IEvaluation) => {
+      const data = this.dataSource.data;
+      data.push(emitted);
+      this.dataSource.data = data;
+    })
   }
 
   ngAfterViewInit(): void {
