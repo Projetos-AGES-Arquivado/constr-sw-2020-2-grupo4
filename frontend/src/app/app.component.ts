@@ -5,9 +5,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {IEvaluation} from './interfaces/IEvaluation';
 import {EvaluationService} from './services/evaluation.service';
 import {MatDialog} from '@angular/material/dialog';
-import { Question } from './interfaces/Question';
+import { IQuestion } from './interfaces/IQuestion';
 import { QuestionsComponent } from './dialog/questions/questions.component';
 import { FormComponent } from './dialog/form/form.component';
+import { ConfirmDeleteComponent } from './dialog/confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-root',
@@ -39,22 +40,54 @@ export class AppComponent implements OnInit, AfterViewInit {
     })
   }
 
-  openQuestionsDialog(data: Question[]) {
+  openQuestionsDialog(data: IQuestion[]) {
     this.dialog.open(QuestionsComponent, {data});
   }
 
-  openFormCreateDialog(){
+  openCreateFormDialog(){
     const ref = this.dialog.open(FormComponent);
     ref.componentInstance.emitService.subscribe((emitted: IEvaluation) => {
-      const data = this.dataSource.data;
-      data.push(emitted);
-      this.dataSource.data = data;
+      this._updateFrontend(emitted);
+      ref.close();
+    })
+  }
+
+  openEditFormDialog(data: IEvaluation){
+    const ref = this.dialog.open(FormComponent, {data});
+    ref.componentInstance.emitService.subscribe((emitted: IEvaluation) => {
+      this._updateFrontend(emitted)
+      ref.close();
+    })
+  }
+
+  openDeleteDialog(data: string){
+    const ref = this.dialog.open(ConfirmDeleteComponent, {data});
+    ref.componentInstance.emitService.subscribe((emitted: string) => {
+      this._updateFrontendOnDelete(emitted);
+      ref.close();
     })
   }
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+  }
+
+  _updateFrontend(emitted: IEvaluation): void{
+    const data = this.dataSource.data;
+    const index = data.findIndex(e => e._id === emitted._id);
+    if(index >= 0){
+      data[index] = emitted;
+    }
+    else data.push(emitted);
+    this.dataSource.data = data;
+  }
+
+  _updateFrontendOnDelete(emitted: string): void{
+    const data = this.dataSource.data;
+    const index = data.findIndex(e => e._id === emitted);
+    if(index >= 0) data.splice(index, 1);
+    this.dataSource.data = data;
   }
 
 }

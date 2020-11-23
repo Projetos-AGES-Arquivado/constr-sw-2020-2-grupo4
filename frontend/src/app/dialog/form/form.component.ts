@@ -1,5 +1,8 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, } from '@angular/forms';
+import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IEvaluation } from 'src/app/interfaces/IEvaluation';
+import { Question } from 'src/app/models/Question';
 import { EvaluationService } from 'src/app/services/evaluation.service';
 import { Evaluation } from '../../models/Evaluation';
 
@@ -20,14 +23,28 @@ export class FormComponent implements OnInit {
     title: string;
   }[];
 
-  constructor(private _formBuilder: FormBuilder, private evaluationService: EvaluationService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: IEvaluation,
+    private _formBuilder: FormBuilder,
+    private evaluationService: EvaluationService) {
     this.arrayItems = [];
     this.evaluation = new Evaluation();
     this.evaluationForm = this._formBuilder.group({
-      nome: [this.evaluation.nome],
-      peso: [this.evaluation.peso],
-      grau: [this.evaluation.grau],
-      descricao: [this.evaluation.descricao],
+      _id: (data) ? data._id : null,
+      nome: (data) ? data.nome : [this.evaluation.nome],
+      peso: (data) ? data.peso : [this.evaluation.peso],
+      grau: (data) ? data.grau : [this.evaluation.grau],
+      descricao: (data) ? data.descricao : [this.evaluation.descricao],
+      questoes: this._formBuilder.array((data) ?
+        data.questoes
+          .map(
+            q => this._formBuilder.group(
+              {
+                enunciado: new FormControl(q.enunciado),
+                resposta: new FormControl(q.resposta)
+              }
+            ))
+        : [])
     });
   }
 
@@ -35,11 +52,36 @@ export class FormComponent implements OnInit {
     this.arrayItems = [];
   }
 
-  onSubmit(){
-    this.evaluationService.saveEvaluation(this.evaluationForm.value).subscribe(
-      data => this.emitService.next(data),
-      error => console.warn(error)
-    )
+  onSubmit() {
+    const data = this.evaluationForm.value;
+    if (data._id) {
+      this.evaluationService.patchEvaluation(this.evaluationForm.value).subscribe(
+        data => this.emitService.next(data),
+        error => console.warn(error)
+      )
+    }
+    else {
+      this.evaluationService.saveEvaluation(this.evaluationForm.value).subscribe(
+        data => this.emitService.next(data),
+        error => console.warn(error)
+      )
+    }
+  }
+
+  questoes(): FormArray {
+    return this.evaluationForm.get('questoes') as FormArray;
+  }
+
+  removeQuestion(index: number) {
+    this.questoes().removeAt(index)
+  }
+
+  _newQuestion(): FormGroup {
+    return this._formBuilder.group(new Question());
+  }
+
+  addQuestion(): void {
+    this.questoes().push(this._newQuestion());
   }
 
 }

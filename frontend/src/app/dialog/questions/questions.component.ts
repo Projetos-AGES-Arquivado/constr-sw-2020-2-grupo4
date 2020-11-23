@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Question } from 'src/app/interfaces/Question';
+import { IQuestion } from 'src/app/interfaces/IQuestion';
 import { MatCard } from '@angular/material/card'
 
 @Component({
@@ -10,7 +10,7 @@ import { MatCard } from '@angular/material/card'
 })
 export class QuestionsComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: Question[]) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: IQuestion[]) {}
 
   ngOnInit(): void {
   }

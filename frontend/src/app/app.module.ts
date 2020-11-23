@@ -17,13 +17,15 @@ import { MatCardModule } from '@angular/material/card';
 import { FormComponent } from './dialog/form/form.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
+import { ConfirmDeleteComponent } from './dialog/confirm-delete/confirm-delete.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     QuestionsComponent,
-    FormComponent
+    FormComponent,
+    ConfirmDeleteComponent
   ],
   imports: [
     BrowserModule,

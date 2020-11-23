@@ -20,4 +20,12 @@ export class EvaluationService {
     return this.http.post<IEvaluation>(`${this.baseUrl}/avaliacoes`, data)
   }
 
+  patchEvaluation(data: IEvaluation){
+    return this.http.patch<IEvaluation>(`${this.baseUrl}/avaliacoes/${data._id}`, data)
+  }
+
+  deleteEvaluation(id: string){
+    return this.http.delete(`${this.baseUrl}/avaliacoes/${id}`);
+  }
+
 }

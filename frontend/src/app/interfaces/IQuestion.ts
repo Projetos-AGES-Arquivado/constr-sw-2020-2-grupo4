@@ -1,5 +1,4 @@
-export interface Question {
-  _id: string;
+export interface IQuestion {
   enunciado: string;
   resposta: string;
 }

@@ -1,4 +1,9 @@
-<h1>Cadastrar Avaliação</h1>
+<ng-container *ngIf="!data">
+  <h1>Cadastrar Avaliação</h1>
+</ng-container>
+<ng-container *ngIf="data">
+  <h1>Editar Avaliação</h1>
+</ng-container>
 <form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <mat-form-field appearance="outline">
@@ -24,5 +29,25 @@
       <input matInput placeholder="Descrição" name="descricao" id="descricao" formControlName="descricao">
     </mat-form-field>
   </div>
-  <button mat-flat-button color="primary" type="submit">Cadastrar</button>
+  <div formArrayName="questoes">
+    <h2>Questões</h2>
+    <div *ngFor="let questao of questoes().controls; let i=index" [formGroupName]="i">
+      <mat-form-field appearance="outline">
+        <mat-label>Enunciado</mat-label>
+        <input matInput placeholder="Enunciado" name="enunciado" id="enunciado" formControlName="enunciado">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Resposta</mat-label>
+        <input matInput placeholder="Resposta" name="resposta" id="resposta" formControlName="resposta">
+      </mat-form-field>
+      <button (click)="removeQuestion(i)" type="button">Remover</button>
+    </div>
+  </div>
+  <button (click)="addQuestion()" type="button">Adicionar</button>
+  <ng-container *ngIf="!data">
+    <button mat-flat-button color="primary" type="submit">Cadastrar</button>
+  </ng-container>
+  <ng-container *ngIf="data">
+    <button mat-flat-button color="primary" type="submit">Editar</button>
+  </ng-container>
 </form>
