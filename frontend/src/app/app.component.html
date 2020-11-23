@@ -1,8 +1,7 @@
 <main>
   <div class="container">
     <div class="title-logo">
-      <img src="/assets/logo-pucrs.svg"/>
-      <h1 class="mat-display-3">Exibição de Avaliações</h1>
+      <h1 class="mat-display-3">Avaliações</h1>
     </div>
 
     <div class="table-container">
@@ -53,7 +52,7 @@
 
       <div class="bottom-container">
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-        <button color="primary" mat-icon-button (click)="openCreateFormDialog()"><mat-icon>add</mat-icon></button>
+        <button color="primary" mat-icon-button (click)="openCreateFormDialog()" class="add-button"><mat-icon>add</mat-icon></button>
       </div>
 
     </div>

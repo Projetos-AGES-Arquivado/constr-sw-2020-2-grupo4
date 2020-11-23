@@ -6,3 +6,8 @@ h1{
 .submit-button{
   margin-top: 24px;
 }
+
+.main-button{
+  background-color: #1976D2;
+  color: #fff;
+}

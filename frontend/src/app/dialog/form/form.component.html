@@ -46,10 +46,10 @@
   <button mat-icon-button (click)="addQuestion()" type="button"><mat-icon>add</mat-icon></button>
   <div class="submit-button">
     <ng-container *ngIf="!data">
-      <button mat-flat-button color="primary" type="submit">Cadastrar</button>
+      <button mat-flat-button class="main-button" type="submit">CADASTRAR</button>
     </ng-container>
     <ng-container *ngIf="data">
-      <button mat-flat-button color="primary" type="submit">Editar</button>
+      <button mat-flat-button class="main-button" type="submit">EDITAR</button>
     </ng-container>
   </div>
 </form>
