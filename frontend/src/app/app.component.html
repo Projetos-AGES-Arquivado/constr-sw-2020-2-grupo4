@@ -16,7 +16,9 @@
 
         <ng-container matColumnDef="nome">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome</th>
-          <td mat-cell *matCellDef="let element"><button (click)="openEditFormDialog(element)">Edit</button><button (click)="openDeleteDialog(element._id)">Delete</button> {{element.nome}} </td>
+          <td mat-cell *matCellDef="let element">
+            <button mat-icon-button (click)="openEditFormDialog(element)"><mat-icon>edit</mat-icon></button>
+            <button mat-icon-button (click)="openDeleteDialog(element._id)"><mat-icon>delete</mat-icon></button> {{element.nome}} </td>
         </ng-container>
 
         <ng-container matColumnDef="grau">
@@ -51,7 +53,7 @@
 
       <div class="bottom-container">
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-        <button mat-fab color="primary" class="buttonAdd" (click)="openCreateFormDialog()">+</button>
+        <button color="primary" mat-icon-button (click)="openCreateFormDialog()"><mat-icon>add</mat-icon></button>
       </div>
 
     </div>

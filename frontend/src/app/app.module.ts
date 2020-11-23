@@ -18,6 +18,7 @@ import { FormComponent } from './dialog/form/form.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { ConfirmDeleteComponent } from './dialog/confirm-delete/confirm-delete.component';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { ConfirmDeleteComponent } from './dialog/confirm-delete/confirm-delete.c
     MatDialogModule,
     MatCardModule,
     ReactiveFormsModule,
-    MatIconModule
+    MatIconModule,
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

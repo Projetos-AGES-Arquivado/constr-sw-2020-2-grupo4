@@ -40,14 +40,16 @@
         <mat-label>Resposta</mat-label>
         <input matInput placeholder="Resposta" name="resposta" id="resposta" formControlName="resposta">
       </mat-form-field>
-      <button (click)="removeQuestion(i)" type="button">Remover</button>
+      <button mat-icon-button (click)="removeQuestion(i)" type="button"><mat-icon>delete</mat-icon></button>
     </div>
   </div>
-  <button (click)="addQuestion()" type="button">Adicionar</button>
-  <ng-container *ngIf="!data">
-    <button mat-flat-button color="primary" type="submit">Cadastrar</button>
-  </ng-container>
-  <ng-container *ngIf="data">
-    <button mat-flat-button color="primary" type="submit">Editar</button>
-  </ng-container>
+  <button mat-icon-button (click)="addQuestion()" type="button"><mat-icon>add</mat-icon></button>
+  <div class="submit-button">
+    <ng-container *ngIf="!data">
+      <button mat-flat-button color="primary" type="submit">Cadastrar</button>
+    </ng-container>
+    <ng-container *ngIf="data">
+      <button mat-flat-button color="primary" type="submit">Editar</button>
+    </ng-container>
+  </div>
 </form>

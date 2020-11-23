@@ -62,6 +62,7 @@ table {
   display: flex;
   justify-content: flex-end;
   padding-top: 1vh;
+  align-items: center;
 }
 
 .buttonAdd {
