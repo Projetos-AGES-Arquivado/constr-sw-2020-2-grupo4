@@ -1,0 +1,13 @@
+h1{
+  font-weight: 900;
+  color: #41414D;
+}
+
+.submit-button{
+  margin-top: 24px;
+}
+
+.main-button{
+  background-color: #1976D2;
+  color: #fff;
+}
