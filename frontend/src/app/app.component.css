@@ -1,5 +1,5 @@
 h1{
-  color: #41414D;
+  color: #000;
 }
 
 main{
@@ -61,7 +61,7 @@ table {
 
 .bottom-container{
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   padding-top: 1vh;
   align-items: center;
 }
