@@ -16,7 +16,7 @@ exports.getClassWithIdController = async function (request, resp) {
         if(request.query.expanded !== undefined && classModel) {
             const validOperations = [
                 {'service': 'content', 'op': ContentService.externalGetContentById},
-                {'service': 'team', 'op': TeamService.externalGetTeamsbyId},
+                {'service': 'team', 'op': TeamService.externalGetTeamById},
                 {'service': 'room', 'op': RoomService.externalGetRoomById},
                 {'service': 'evaluation', 'op': EvaluationService.externalGetEvaluationWithId}
             ];
