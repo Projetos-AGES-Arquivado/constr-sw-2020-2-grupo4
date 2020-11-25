@@ -6,25 +6,23 @@
 </ng-container>
 <form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>Nome</mat-label>
       <input matInput placeholder="Nome" name="nome" id="nome" formControlName="nome">
     </mat-form-field>
   </div>
-  <div class="form-group">
-    <mat-form-field appearance="outline">
+  <div class="form-group side-by-side">
+    <mat-form-field>
       <mat-label>Peso</mat-label>
       <input matInput placeholder="Peso" name="peso" id="peso" formControlName="peso" type="number">
     </mat-form-field>
-  </div>
-  <div class="form-group">
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>Grau</mat-label>
       <input matInput placeholder="Grau" name="grau" id="grau" formControlName="grau" type="number">
     </mat-form-field>
   </div>
   <div class="form-group">
-    <mat-form-field appearance="outline">
+    <mat-form-field>
       <mat-label>Descrição</mat-label>
       <input matInput placeholder="Descrição" name="descricao" id="descricao" formControlName="descricao">
     </mat-form-field>
@@ -32,11 +30,11 @@
   <div formArrayName="questoes">
     <h2>Questões</h2>
     <div *ngFor="let questao of questoes().controls; let i=index" [formGroupName]="i">
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>Enunciado</mat-label>
         <input matInput placeholder="Enunciado" name="enunciado" id="enunciado" formControlName="enunciado">
       </mat-form-field>
-      <mat-form-field appearance="outline">
+      <mat-form-field>
         <mat-label>Resposta</mat-label>
         <input matInput placeholder="Resposta" name="resposta" id="resposta" formControlName="resposta">
       </mat-form-field>
@@ -45,6 +43,7 @@
   </div>
   <button mat-icon-button (click)="addQuestion()" type="button"><mat-icon>add</mat-icon></button>
   <div class="submit-button">
+    <button mat-flat-button class="cancel-button" type="button" (click)="closeForm()">CANCELAR</button>
     <ng-container *ngIf="!data">
       <button mat-flat-button class="main-button" type="submit">CADASTRAR</button>
     </ng-container>

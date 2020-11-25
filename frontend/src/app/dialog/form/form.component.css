@@ -5,9 +5,35 @@ h1{
 
 .submit-button{
   margin-top: 24px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.submit-button :first-child{
+  margin-right: 8px;
 }
 
 .main-button{
   background-color: #1976D2;
   color: #fff;
+}
+
+.cancel-button{
+  background-color: #fff;
+  color: #1976D2;
+  border: 1px solid #1976D2;
+}
+
+mat-form-field{
+  margin-left: 8px;
+  width: 80%;
+}
+
+.side-by-side{
+  width: 80%;
+}
+
+.side-by-side mat-form-field{
+  width: 40%;
 }

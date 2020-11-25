@@ -1,10 +1,11 @@
 import { Component, EventEmitter, Inject, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IEvaluation } from 'src/app/interfaces/IEvaluation';
 import { Question } from 'src/app/models/Question';
 import { EvaluationService } from 'src/app/services/evaluation.service';
 import { Evaluation } from '../../models/Evaluation';
+import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-questions',
@@ -24,6 +25,7 @@ export class FormComponent implements OnInit {
   }[];
 
   constructor(
+    public dialogRef: MatDialogRef<ConfirmDeleteComponent>,
     @Inject(MAT_DIALOG_DATA) public data: IEvaluation,
     private _formBuilder: FormBuilder,
     private evaluationService: EvaluationService) {
@@ -82,6 +84,10 @@ export class FormComponent implements OnInit {
 
   addQuestion(): void {
     this.questoes().push(this._newQuestion());
+  }
+
+  closeForm(): void {
+    this.dialogRef.close();
   }
 
 }

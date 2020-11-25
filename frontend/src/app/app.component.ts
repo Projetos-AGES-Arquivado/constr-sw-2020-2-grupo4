@@ -17,7 +17,7 @@ import { ConfirmDeleteComponent } from './dialog/confirm-delete/confirm-delete.c
 })
 
 export class AppComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['nome', 'grau', 'peso', 'descricao', 'questoes'];
+  displayedColumns: string[] = ['nome', 'grau', 'peso', 'descricao', 'questoes', 'editar', 'deletar'];
   dataSource: MatTableDataSource<IEvaluation>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -45,7 +45,9 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   openCreateFormDialog(){
-    const ref = this.dialog.open(FormComponent);
+    const ref = this.dialog.open(FormComponent,  {
+      width: '70%',
+    });
     ref.componentInstance.emitService.subscribe((emitted: IEvaluation) => {
       this._updateFrontend(emitted);
       ref.close();
@@ -53,7 +55,10 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   openEditFormDialog(data: IEvaluation){
-    const ref = this.dialog.open(FormComponent, {data});
+    const ref = this.dialog.open(FormComponent, {
+      data,
+      width: '70%',
+    });
     ref.componentInstance.emitService.subscribe((emitted: IEvaluation) => {
       this._updateFrontend(emitted)
       ref.close();
