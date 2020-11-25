@@ -36,11 +36,11 @@ const externalGetRoomById = async (id) => {
             return externalResponse;
         }
     } catch (error) {
-        console.log('something happened on external service call! ', error);
+        
         return error;
     }
 
-    console.log('externalResponse');
+    
     return JSON.parse(externalResponse);
 }
 

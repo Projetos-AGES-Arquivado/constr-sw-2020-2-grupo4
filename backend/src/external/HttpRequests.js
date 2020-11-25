@@ -18,19 +18,19 @@ exports.sendRequest = (requestBody, options) => new Promise((resolve, reject) =>
         //Set a listener for when the request ends
         res.on('end', _ => {
             //Log the status code and url
-            console.log(Chalk.green(`${Chalk.blue(res.statusCode)} <- ${url}`));
+            
 
             resolve(body);
         });
     }).on('error', error => {
         //Log the error
-        console.log(Chalk.red(`${Chalk.white(error)} <- ${url}`));
+        
         //Return the error
         reject(error);
     });
 
     //Log the request
-    console.log(Chalk.green(`${Chalk.blue(options.method)} -> ${url}`));
+    
 
     //Check if the request has a body
     if (requestBody) {

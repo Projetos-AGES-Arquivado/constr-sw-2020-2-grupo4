@@ -22,7 +22,7 @@ const insertService = async (data) => {
                 try {
                     result = await classModel.save();
                 } catch (error) {
-                    console.log('error ', error);
+                    
                 }
                 return result
             }
@@ -34,7 +34,7 @@ const getClassWithIdService = async (id) => {
     try {
         result = await ClassModel.findById(id);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
@@ -44,7 +44,7 @@ const getAllClassesService = async (queryParams) => {
     try {
         result = await ClassModel.find(queryParams);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
@@ -54,7 +54,7 @@ const deleteClassWithIdService = async (id) => {
     try {
         result = await ClassModel.findByIdAndDelete(id);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
@@ -64,7 +64,7 @@ const deleteAllClassesService = async (queryParams) => {
     try {
         result = await ClassModel.deleteMany(queryParams);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
@@ -74,7 +74,7 @@ const updateClassWithIdService = async (id, payload) => {
     try {
         result = await ClassModel.findByIdAndUpdate(id, payload);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
