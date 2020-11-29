@@ -4,20 +4,20 @@
       <h1 class="mat-display-3">Avaliações</h1>
     </div>
 
-    <div class="table-container">
-
+    <div class="filter-container">
       <mat-form-field class="filter-field">
         <mat-label>Filtrar</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Programação" #input/>
       </mat-form-field>
+    </div>
+
+    <div class="table-container">
 
       <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
         <ng-container matColumnDef="nome">
           <th mat-header-cell *matHeaderCellDef mat-sort-header> Nome</th>
-          <td mat-cell *matCellDef="let element">
-            <button mat-icon-button (click)="openEditFormDialog(element)"><mat-icon>edit</mat-icon></button>
-            <button mat-icon-button (click)="openDeleteDialog(element._id)"><mat-icon>delete</mat-icon></button> {{element.nome}} </td>
+          <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
         </ng-container>
 
         <ng-container matColumnDef="grau">
@@ -41,6 +41,18 @@
           </td>
         </ng-container>
 
+        <ng-container matColumnDef="editar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Editar</th>
+          <td mat-cell *matCellDef="let element"><button mat-icon-button (click)="openEditFormDialog(element)"><mat-icon>edit</mat-icon></button>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="deletar">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Deletar</th>
+          <td mat-cell *matCellDef="let element"><button mat-icon-button (click)="openDeleteDialog(element._id)"><mat-icon>delete</mat-icon></button>
+          </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
@@ -48,7 +60,6 @@
           <td class="mat-cell" colspan="3">No data matching the filter "{{input.value}}"</td>
         </tr>
       </table>
-
 
       <div class="bottom-container">
         <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>

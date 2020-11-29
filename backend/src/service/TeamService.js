@@ -23,5 +23,20 @@ const externalGetTeamsbyId = async (id) => {
     return teamsList
 }
 
+const externalGetTeamById = async (id) => {
+    const options = {
+        hostname: TeamExternalService.HOSTNAME,
+        path: `${TeamExternalService.GET}/${id}`,
+        port: TeamExternalService.PORT,
+        method: HttpMethod.GET
+    };
+    let response;
+    try{
+        response = await HttpRequests.sendRequest('', options);
+        (response);
+    }catch(e){}
+    return response;
+}
 
 exports.externalGetTeamsbyId = externalGetTeamsbyId;
+exports.externalGetTeamById = externalGetTeamById;

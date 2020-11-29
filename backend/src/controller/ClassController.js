@@ -16,7 +16,7 @@ exports.getClassWithIdController = async function (request, resp) {
         if(request.query.expanded !== undefined && classModel) {
             const validOperations = [
                 {'service': 'content', 'op': ContentService.externalGetContentById},
-                {'service': 'team', 'op': TeamService.externalGetTeamsbyId},
+                {'service': 'team', 'op': TeamService.externalGetTeamById},
                 {'service': 'room', 'op': RoomService.externalGetRoomById},
                 {'service': 'evaluation', 'op': EvaluationService.externalGetEvaluationWithId}
             ];
@@ -40,7 +40,7 @@ exports.getClassWithIdController = async function (request, resp) {
         }
         let response;
         if(classModel){
-            console.log(classModel)
+            (classModel)
             response = {
                 success: true,
                 message: "Class retrieved successfully",
@@ -80,6 +80,7 @@ exports.insertController = async function (request, resp) {
             return resp.response(data).code(201);
         }
     } catch (error) {
+        (error)
         return resp.response(error).code(500);
     }
 }
@@ -93,12 +94,12 @@ exports.getTeamsByClassId = async function (request, resp) {
             message: `All teams from class ${id} retrieved successfully`,
             data: contents
         }
-        console.log('contents ', contents);
+        ('contents ', contents);
 
         return resp.response(response);
     } catch (error) {
 
-        console.log('errors ', error);
+        ('errors ', error);
 
         return resp.response(error).code(500);
     }

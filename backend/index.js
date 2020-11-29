@@ -109,7 +109,8 @@ if (process.env.NODE_ENV !== 'test') {
 		).then(() => {
 			server.auth.strategy('simple', 'basic', { validate });
 
-			server.route(routes);
+			server.route(routes, { config: { cors: { origin: ['*'] }}});
+			// server.route(routes);
 			
 			server.start()
 		});

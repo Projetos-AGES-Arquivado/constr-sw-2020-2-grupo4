@@ -1,5 +1,4 @@
 var ClassModel = require('../model/ClassModel');
-var HttpRequests = require('../external/HttpRequests');
 const TeamService = require('../service/TeamService');
 const RoomService = require('../service/RoomService');
 const ContentService = require('../service/ContentService');
@@ -10,11 +9,11 @@ const insertService = async (data) => {
     const responseFromRoomService = RoomService.externalGetRoomById(data.room)
     const responseFromContentService = ContentService.externalGetContentById(data.content)
     const responseFromEvaluationService = EvaluationService.externalGetEvaluationWithId(data.evaluation)
-    const responseFromTeamService = TeamService.externalGetTeamsbyId(data.team)
+    const responseFromTeamService = TeamService.externalGetTeamById(data.team)
     
     return Promise.all([responseFromRoomService, responseFromContentService, responseFromEvaluationService, responseFromTeamService])
         .then(async (values) => {
-            if(values.some(e => (e.errno || e.error || e.getStatus !== undefined || (Array.isArray(e) && e.length === 0)))){
+            if(values.some(e => (e == null || e.errno || e.error || e.getStatus !== undefined || (Array.isArray(e) && e.length === 0)))){
                 return false;
             }
             else{
@@ -22,7 +21,7 @@ const insertService = async (data) => {
                 try {
                     result = await classModel.save();
                 } catch (error) {
-                    console.log('error ', error);
+                    
                 }
                 return result
             }
@@ -34,7 +33,7 @@ const getClassWithIdService = async (id) => {
     try {
         result = await ClassModel.findById(id);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
@@ -44,7 +43,7 @@ const getAllClassesService = async (queryParams) => {
     try {
         result = await ClassModel.find(queryParams);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
@@ -54,7 +53,7 @@ const deleteClassWithIdService = async (id) => {
     try {
         result = await ClassModel.findByIdAndDelete(id);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
@@ -64,21 +63,19 @@ const deleteAllClassesService = async (queryParams) => {
     try {
         result = await ClassModel.deleteMany(queryParams);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
 
 const updateClassWithIdService = async (id, payload) => {
-    //update class
     try {
         result = await ClassModel.findByIdAndUpdate(id, payload);
     } catch (error) {
-        console.log('error ', error);
+        
     }
     return result
 }
-
 
 const getTeamsByClassId = async (id) => {
     const curClass = await getClassWithIdService(id);

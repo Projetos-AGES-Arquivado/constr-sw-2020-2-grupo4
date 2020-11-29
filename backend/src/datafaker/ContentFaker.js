@@ -92,7 +92,7 @@ var mongoose = require('mongoose');
 
         allContents.map((content) => {
             if(content.classes.includes(classId)) {
-                console.log('content if ', content);
+                
                 allContentsByClass.push(content);
             }
         });
