@@ -6,26 +6,13 @@ const EvaluationService = require('../service/EvaluationService');
 
 
 const insertService = async (data) => {
-    const responseFromRoomService = RoomService.externalGetRoomById(data.room)
-    const responseFromContentService = ContentService.externalGetContentById(data.content)
-    const responseFromEvaluationService = EvaluationService.externalGetEvaluationWithId(data.evaluation)
-    const responseFromTeamService = TeamService.externalGetTeamById(data.team)
-    
-    return Promise.all([responseFromRoomService, responseFromContentService, responseFromEvaluationService, responseFromTeamService])
-        .then(async (values) => {
-            if(values.some(e => (e == null || e.errno || e.error || e.getStatus !== undefined || (Array.isArray(e) && e.length === 0)))){
-                return false;
-            }
-            else{
-                const classModel = new ClassModel(data);
-                try {
-                    result = await classModel.save();
-                } catch (error) {
-                    
-                }
-                return result
-            }
-        })
+    const classModel = new ClassModel(data);
+    try {
+        result = await classModel.save();
+        return result;
+    } catch (error) {
+        return error;
+    }    
 }
 
 const getClassWithIdService = async (id) => {
