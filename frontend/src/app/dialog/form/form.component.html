@@ -1,30 +1,33 @@
-<ng-container *ngIf="!data">
+<ng-container *ngIf="!data.evaluation && !data.isViewOnly">
   <h1>Cadastrar Avaliação</h1>
 </ng-container>
-<ng-container *ngIf="data">
+<ng-container *ngIf="data.evaluation && !data.isViewOnly">
   <h1>Editar Avaliação</h1>
+</ng-container>
+<ng-container *ngIf="data.isViewOnly">
+  <h1>Visualizar Avaliação</h1>
 </ng-container>
 <form [formGroup]="evaluationForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <mat-form-field>
       <mat-label>Nome</mat-label>
-      <input matInput placeholder="Nome" name="nome" id="nome" formControlName="nome">
+      <input matInput placeholder="Nome" name="nome" id="nome" formControlName="nome" [readonly]="data.isViewOnly">
     </mat-form-field>
   </div>
   <div class="form-group side-by-side">
     <mat-form-field>
       <mat-label>Peso</mat-label>
-      <input matInput placeholder="Peso" name="peso" id="peso" formControlName="peso" type="number">
+      <input matInput placeholder="Peso" name="peso" id="peso" formControlName="peso" type="number" [readonly]="data.isViewOnly">
     </mat-form-field>
     <mat-form-field>
       <mat-label>Grau</mat-label>
-      <input matInput placeholder="Grau" name="grau" id="grau" formControlName="grau" type="number">
+      <input matInput placeholder="Grau" name="grau" id="grau" formControlName="grau" type="number" [readonly]="data.isViewOnly">
     </mat-form-field>
   </div>
   <div class="form-group">
     <mat-form-field>
       <mat-label>Descrição</mat-label>
-      <input matInput placeholder="Descrição" name="descricao" id="descricao" formControlName="descricao">
+      <input matInput placeholder="Descrição" name="descricao" id="descricao" formControlName="descricao" [readonly]="data.isViewOnly">
     </mat-form-field>
   </div>
   <div formArrayName="questoes">
@@ -32,22 +35,26 @@
     <div *ngFor="let questao of questoes().controls; let i=index" [formGroupName]="i">
       <mat-form-field>
         <mat-label>Enunciado</mat-label>
-        <input matInput placeholder="Enunciado" name="enunciado" id="enunciado" formControlName="enunciado">
+        <input matInput placeholder="Enunciado" name="enunciado" id="enunciado" formControlName="enunciado" [readonly]="data.isViewOnly">
       </mat-form-field>
       <mat-form-field>
         <mat-label>Resposta</mat-label>
-        <input matInput placeholder="Resposta" name="resposta" id="resposta" formControlName="resposta">
+        <input matInput placeholder="Resposta" name="resposta" id="resposta" formControlName="resposta" [readonly]="data.isViewOnly">
       </mat-form-field>
-      <button mat-icon-button (click)="removeQuestion(i)" type="button"><mat-icon>delete</mat-icon></button>
+      <ng-container *ngIf="!data.isViewOnly">
+        <button mat-icon-button (click)="removeQuestion(i)" type="button"><mat-icon>delete</mat-icon></button>
+      </ng-container>
     </div>
   </div>
-  <button mat-icon-button (click)="addQuestion()" type="button"><mat-icon>add</mat-icon></button>
+  <ng-container *ngIf="!data.isViewOnly">
+    <button mat-icon-button (click)="addQuestion()" type="button"><mat-icon>add</mat-icon></button>
+  </ng-container>
   <div class="submit-button">
     <button mat-flat-button class="cancel-button" type="button" (click)="closeForm()">CANCELAR</button>
-    <ng-container *ngIf="!data">
+    <ng-container *ngIf="!data.evaluation && !data.isViewOnly">
       <button mat-flat-button class="main-button" type="submit">CADASTRAR</button>
     </ng-container>
-    <ng-container *ngIf="data">
+    <ng-container *ngIf="data.evaluation && !data.isViewOnly">
       <button mat-flat-button class="main-button" type="submit">EDITAR</button>
     </ng-container>
   </div>

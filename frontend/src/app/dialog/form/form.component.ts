@@ -26,19 +26,19 @@ export class FormComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<ConfirmDeleteComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: IEvaluation,
+    @Inject(MAT_DIALOG_DATA) public data: {evaluation: IEvaluation, isViewOnly: boolean},
     private _formBuilder: FormBuilder,
     private evaluationService: EvaluationService) {
     this.arrayItems = [];
     this.evaluation = new Evaluation();
     this.evaluationForm = this._formBuilder.group({
-      _id: (data) ? data._id : null,
-      nome: (data) ? data.nome : [this.evaluation.nome],
-      peso: (data) ? data.peso : [this.evaluation.peso],
-      grau: (data) ? data.grau : [this.evaluation.grau],
-      descricao: (data) ? data.descricao : [this.evaluation.descricao],
-      questoes: this._formBuilder.array((data) ?
-        data.questoes
+      _id: (data.evaluation) ? data.evaluation._id : null,
+      nome: (data.evaluation) ? data.evaluation.nome : [this.evaluation.nome],
+      peso: (data.evaluation) ? data.evaluation.peso : [this.evaluation.peso],
+      grau: (data.evaluation) ? data.evaluation.grau : [this.evaluation.grau],
+      descricao: (data.evaluation) ? data.evaluation.descricao : [this.evaluation.descricao],
+      questoes: this._formBuilder.array((data.evaluation) ?
+        data.evaluation.questoes
           .map(
             q => this._formBuilder.group(
               {
