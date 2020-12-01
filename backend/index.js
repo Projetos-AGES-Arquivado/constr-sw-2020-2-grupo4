@@ -38,7 +38,7 @@ const validate = async (request, username, password) => {
 const { host, port } = constants.application;
 const { host : databaseHost, database: databaseName } = constants.database;
 
-const server = new Hapi.Server({ host: host, port: port });
+const server = new Hapi.Server({ host: host, port: port, routes: { cors: true } });
 server.realm.modifiers.route.prefix = '/api/v1'
 
 console.log('MONGO: ', `mongodb://${databaseHost}${databaseName}`);
@@ -109,10 +109,9 @@ if (process.env.NODE_ENV !== 'test') {
 		).then(() => {
 			server.auth.strategy('simple', 'basic', { validate });
 
-			server.route(routes, { config: { cors: { origin: ['*'] }}});
-			// server.route(routes);
+			server.route(routes);
 			
-			server.start()
+			server.start();
 		});
 	console.log('Server running in port #' + port);
 }
