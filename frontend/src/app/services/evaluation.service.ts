@@ -28,4 +28,8 @@ export class EvaluationService {
     return this.http.delete(`${this.baseUrl}/avaliacoes/${id}`);
   }
 
+  getAllEvaluationsFilterByGrau(grau: number){
+    return this.http.get<IEvaluation[]>(`${this.baseUrl}/avaliacoes?grau=${grau}`);
+  }
+
 }

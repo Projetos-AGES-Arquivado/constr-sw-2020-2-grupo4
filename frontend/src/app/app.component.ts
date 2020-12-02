@@ -9,6 +9,8 @@ import { IQuestion } from './interfaces/IQuestion';
 import { QuestionsComponent } from './dialog/questions/questions.component';
 import { FormComponent } from './dialog/form/form.component';
 import { ConfirmDeleteComponent } from './dialog/confirm-delete/confirm-delete.component';
+import { FormControl } from '@angular/forms';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +20,8 @@ import { ConfirmDeleteComponent } from './dialog/confirm-delete/confirm-delete.c
 
 export class AppComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['nome', 'grau', 'peso', 'descricao', 'questoes', 'editar', 'deletar', 'visualizar'];
+  grausControl = new FormControl();
+  graus: number[] = [1,2];
   dataSource: MatTableDataSource<IEvaluation>;
 
   @ViewChild(MatSort) sort: MatSort;
@@ -105,6 +109,18 @@ export class AppComponent implements OnInit, AfterViewInit {
     const index = data.findIndex(e => e._id === emitted);
     if(index >= 0) data.splice(index, 1);
     this.dataSource.data = data;
+  }
+
+  filterByGrau(event: MatSelectChange){
+    (event.value !== undefined) ?
+      this.evaluationService.getAllEvaluationsFilterByGrau(event.value)
+        .subscribe((data: IEvaluation[]) => {
+          this.dataSource.data = data;
+        })
+    :
+      this.evaluationService.getAllEvaluations().subscribe((data: IEvaluation[]) => {
+        this.dataSource.data = data;
+      })
   }
 
 }

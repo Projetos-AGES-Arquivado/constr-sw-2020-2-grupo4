@@ -9,6 +9,15 @@
         <mat-label>Filtrar</mat-label>
         <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Programação" #input/>
       </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Grau</mat-label>
+        <mat-select (selectionChange)="filterByGrau($event)">
+          <mat-option>--</mat-option>
+          <mat-option *ngFor="let grau of graus" [value]="grau">
+            {{grau}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
     <div class="table-container">
