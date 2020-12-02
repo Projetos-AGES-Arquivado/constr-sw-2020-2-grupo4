@@ -1,5 +1,5 @@
 "use strict";
 
-exports.HOSTNAME = '3.128.18.231'
-exports.PORT = '5000'
+exports.HOSTNAME = '18.223.190.133'
+exports.PORT = '3333'
 exports.GET = '/content'
