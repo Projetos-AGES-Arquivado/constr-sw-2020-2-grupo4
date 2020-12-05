@@ -3,34 +3,34 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 
 /**
- * Dialog useful when deleting entries
+ * Dialog useful to confirm or cancel an action (method)
  * Receives data on constructor as the following:
  * {
       targetId: string,
       titleText: string,
       confirmText: string,
       cancelText: string,
-      deleteFunction(): Observable<Object>
+      action(): Observable<Object>
     }
-  When deleteFunction is executed, uses an EventEmitter to return the targetId (deleted data ID)
+  When action is executed, uses an EventEmitter to return the targetId (data ID)
  */
 
 @Component({
-  selector: 'app-confirm-delete',
-  templateUrl: './confirm-delete.component.html',
-  styleUrls: ['./confirm-delete.component.css']
+  selector: 'app-confirm',
+  templateUrl: './confirm.component.html',
+  styleUrls: ['./confirm.component.css']
 })
-export class ConfirmDeleteComponent implements OnInit {
+export class ConfirmComponent implements OnInit {
 
   @Output() emitService = new EventEmitter;
 
-  constructor(public dialogRef: MatDialogRef<ConfirmDeleteComponent>,
+  constructor(public dialogRef: MatDialogRef<ConfirmComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
       targetId: string
       titleText: string,
       confirmText: string,
       cancelText: string,
-      deleteFunction(): Observable<Object>
+      action(): Observable<Object>
     }) { }
 
   ngOnInit(): void {
@@ -46,8 +46,8 @@ export class ConfirmDeleteComponent implements OnInit {
   /**
    * Executes the deletion callback, expecting and using the Observer<Object> return on the EventEmitter.
    */
-  doDelete(){
-    this.data.deleteFunction().subscribe(
+  doAction(){
+    this.data.action().subscribe(
       val => this.emitService.next(this.data.targetId),
       error => console.warn(error)
     );

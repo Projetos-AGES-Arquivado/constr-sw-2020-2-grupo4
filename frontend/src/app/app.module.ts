@@ -17,7 +17,7 @@ import { MatCardModule } from '@angular/material/card';
 import { FormComponent } from './dialog/form/form.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { ConfirmDeleteComponent } from './dialog/confirm-delete/confirm-delete.component';
+import { ConfirmComponent } from './dialog/confirm/confirm.component';
 import {MatListModule} from '@angular/material/list';
 import { MatSelectModule } from '@angular/material/select';
 
@@ -27,7 +27,7 @@ import { MatSelectModule } from '@angular/material/select';
     AppComponent,
     QuestionsComponent,
     FormComponent,
-    ConfirmDeleteComponent
+    ConfirmComponent
   ],
   imports: [
     BrowserModule,

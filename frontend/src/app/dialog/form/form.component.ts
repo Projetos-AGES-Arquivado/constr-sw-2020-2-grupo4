@@ -5,7 +5,6 @@ import { IEvaluation } from 'src/app/interfaces/IEvaluation';
 import { Question } from 'src/app/models/Question';
 import { EvaluationService } from 'src/app/services/evaluation.service';
 import { Evaluation } from '../../models/Evaluation';
-import { ConfirmDeleteComponent } from '../confirm-delete/confirm-delete.component';
 
 @Component({
   selector: 'app-questions',
@@ -25,7 +24,7 @@ export class FormComponent implements OnInit {
   }[];
 
   constructor(
-    public dialogRef: MatDialogRef<ConfirmDeleteComponent>,
+    public dialogRef: MatDialogRef<FormComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {evaluation: IEvaluation, isViewOnly: boolean},
     private _formBuilder: FormBuilder,
     private evaluationService: EvaluationService) {

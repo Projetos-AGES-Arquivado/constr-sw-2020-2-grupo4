@@ -8,7 +8,7 @@ import {MatDialog} from '@angular/material/dialog';
 import { IQuestion } from './interfaces/IQuestion';
 import { QuestionsComponent } from './dialog/questions/questions.component';
 import { FormComponent } from './dialog/form/form.component';
-import { ConfirmDeleteComponent } from './dialog/confirm-delete/confirm-delete.component';
+import { ConfirmComponent } from './dialog/confirm/confirm.component';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 
@@ -82,13 +82,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   openDeleteDialog(data: string){
-    const ref = this.dialog.open(ConfirmDeleteComponent, {
+    const ref = this.dialog.open(ConfirmComponent, {
       data: {
         targetId: data,
         titleText: 'Deseja deletar essa avaliação?',
         confirmText: 'Sim',
         cancelText: 'Não',
-        deleteFunction: () => this.evaluationService.deleteEvaluation(data)
+        action: () => this.evaluationService.deleteEvaluation(data)
       }
     });
     ref.componentInstance.emitService.subscribe((emitted: string) => {

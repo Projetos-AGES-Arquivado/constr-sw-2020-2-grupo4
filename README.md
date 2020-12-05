@@ -13,10 +13,10 @@ Frontend construído utilizando Angular 11, referente a API de avaliações.
 
 Backend para API de aulas, construído utilizando JS + Hapi.
 
-## [Componente para Frontend](https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo4/tree/master/frontend/src/app/dialog/confirm-delete)
+## [Componente para Frontend](https://github.com/AGES-PUCRS/constr-sw-2020-2-grupo4/tree/master/frontend/src/app/dialog/confirm)
 
-Componente para confirmação de deleção de entrada.
+Componente para confirmação de ação (método) referente a uma entrada.
 
-Recebe como parametros em seu construtor as informações de texto a serem mostradas, bem como a função encarregada de realizar a deleção da entrada.
+Recebe como parametros em seu construtor as informações de texto a serem mostradas, bem como a função encarregada de realizar a respectiva ação (na aplicação, usa-se para deleção).
 
 Maiores informações na implementação e documentação do código fonte.
