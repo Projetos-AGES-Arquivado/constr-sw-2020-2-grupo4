@@ -82,7 +82,15 @@ export class AppComponent implements OnInit, AfterViewInit {
   }
 
   openDeleteDialog(data: string){
-    const ref = this.dialog.open(ConfirmDeleteComponent, {data});
+    const ref = this.dialog.open(ConfirmDeleteComponent, {
+      data: {
+        targetId: data,
+        titleText: 'Deseja deletar essa avaliação?',
+        confirmText: 'Sim',
+        cancelText: 'Não',
+        deleteFunction: () => this.evaluationService.deleteEvaluation(data)
+      }
+    });
     ref.componentInstance.emitService.subscribe((emitted: string) => {
       this._updateFrontendOnDelete(emitted);
       ref.close();
